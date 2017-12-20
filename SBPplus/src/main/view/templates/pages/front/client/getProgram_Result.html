@@ -1,0 +1,125 @@
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js">
+</head>
+
+<body style="background: rgba(0,0,0,0.3)">
+<div class="container-fluid">
+
+    <div class="row" style="margin-top: 10%">
+        <div class="col-md-4 col-md-push-4">
+            <div class="panel panel-success" style="vertical-align: middle">
+                <div class="panel-heading">
+                    <button class="close" id="close" aria-hidden="true">&times;</button>
+                    免费获取方案报价
+                </div>
+                <div class="panel-body">
+                    <div style="text-align: center">
+
+                        <div th:if="${result==true}">
+                            <img id="successImg" th:src="@{/images/client/front/success.png}"/>
+                            <h3 class="h3" style="text-align: center;font-family: '黑体">
+                                恭喜您！方案发布成功，我们会尽快与您联系，请您保持电话畅通</h3>
+                        </div>
+                        <div th:if="${result==false}">
+                            <h1>获取方案失败</h1>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-xs-4 ">
+                            <hr/>
+                        </div>
+                        <div class="col-xs-4" style="text-align: center;margin-top: 10px;padding:0px;">
+                            您的专属顾问
+                        </div>
+                        <div class="col-xs-4">
+                            <hr/>
+                        </div>
+                    </div>
+                    <div style="padding: 20px">
+                        <div class="col-xs-6" style="text-align: center">
+                            <img id="myErweima" th:src="@{/images/client/front/myErweima.png}"/>
+                        </div>
+                        <div class="col-xs-6" style="text-align: left">
+                            小黎<br/>
+                            扫描二维码，加我微信<br/>
+                            18223170162<br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <small>千里码，全方位为您服务</small>
+                    <button class="btn btn-danger" id="returnIndex">关闭并回到首页</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        $("#close").click(function () {
+           window.location="/"//去服务器跳转到首页
+        });
+        $("#returnIndex").click(function () {
+            window.location="/"//  “/”表示的是根路径："localhost/" 去服务器跳转到首页
+        })
+    })
+</script>
+
+<style type="text/css">
+    #modal_body {
+        height: 400px;
+    }
+
+    #successImg {
+        width: 50px;
+    }
+
+    #myErweima {
+        width: 120px;
+    }
+
+    @media (min-width: 768px) {
+        #modal_body {
+            height: 500px;
+        }
+
+        #successImg {
+            width: 100px;
+        }
+
+        #myErweima {
+            width: 150px;
+        }
+    }
+
+    @media (min-width: 900px) {
+        #modal_body {
+            height: 500px;
+        }
+
+        #successImg {
+            width: 100px;
+        }
+
+        #myErweima {
+            width: 110px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        #modal_body {
+            height: 550px;
+        }
+
+        #successImg {
+            width: 100px;
+        }
+
+        #myErweima {
+            width: 150px;
+        }
+    }
+</style>
+</html>

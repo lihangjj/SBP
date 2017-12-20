@@ -1,0 +1,73 @@
+
+@media (min-width: 992px) {
+    #logo {
+        width: 40px;
+    }
+    #companyTitle div:nth-child(1) {
+        font-size: 40px;
+    }
+
+    #companyTitle div:nth-child(2) {
+        font-size: 30px;
+    }
+
+    #advantage {
+        height: 80px;
+        text-align: center;
+    }
+
+    #advantage img {
+        width: 80px;
+        padding: 16px
+    }
+
+    #service {
+        margin-top: 100px;
+    }
+
+    #service > div {
+        height: 500px;
+    }
+
+    #price span, #advantage span {
+        font-family: '黑体';
+        font-size: 20px;
+        color: #000000;
+    }
+
+    #price p {
+        font-family: '等线';
+        font-size: 14px;
+        color: #646464;
+    }
+
+    #service *:not(#myservice) {
+        font-size: 12px;
+        font-family: "黑体";
+        color: #969696;
+    }
+
+    #myservice {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-family: "黑体";
+        color: #000000;
+    }
+
+    #service img {
+        height: 120px;
+    }
+
+    #wangzhan div {
+        margin-right: 0px;
+    }
+
+    #ruanjian div {
+        margin-right: 0px;
+    }
+
+    #buzhou img {
+        height: 80px;
+    }
+}

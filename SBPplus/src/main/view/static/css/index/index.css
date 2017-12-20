@@ -1,0 +1,123 @@
+.row > div { /*设置与屏幕的*/
+    padding: 0;
+}
+
+#companyTitle div {
+    text-align: center;
+    white-space: nowrap;
+    font-family: '黑体';
+    padding: 5px
+}
+
+#companyTitle div:nth-child(1) {
+    margin-top: -22%;
+    color: #00a2e9;
+    font-size: 20px;
+}
+
+#advantage {
+    height: 30px;
+    background: white;
+    text-align: left;
+}
+
+#companyTitle div:nth-child(2) {
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+}
+
+#advantage img {
+    width: 60px;
+    padding: 8px;
+}
+
+.phonejianju * {
+    margin-left: 10px;
+}
+
+.phone {
+    font-family: '等线';
+    font-size: 12px;
+    color: #969696;
+}
+
+.title {
+    font-family: '黑体';
+    font-size: 14px;
+    color: #000000;
+}
+
+#service img {
+    height: 60px;
+}
+
+#wangzhan div, #wangzhan img {
+    margin-right: 0;
+}
+
+#ruanjian div, #ruanjian img {
+    margin-right: 0;
+}
+
+#service {
+    margin-top: 370px;
+}
+
+#service *:not(#myservice) {
+    font-size: 12px;
+    font-family: "黑体";
+    color: #969696;
+}
+
+#myservice {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-family: "黑体";
+    color: #000000;
+}
+
+#service > div {
+    height: 250px;
+}
+
+#buzhou img {
+    height: 40px;
+}
+
+#xiangmuyuyue input, #xiangmuyuyue select {
+    font-family: "等线";
+    margin: 5px 0 5px 0;
+}
+
+#xiangmuyuyue button {
+    font-family: "等线";
+    margin: 5px 0 5px 0;
+}
+
+#xiangmuyuyue textarea {
+    font-family: "等线";
+    margin-bottom: 0px;
+}
+
+#claimDiv {
+    text-align: right;
+    padding: 0 5px 0 5px;
+}
+#yusuanDiv{
+    padding: 0 5px 0 5px;
+
+}
+
+#xiangmuyuyue button {
+    border: solid #00a2e9;
+    color: black;
+    background: #00a2e9;
+}
+#logo {
+    width: 20px;
+}
+#logoDiv{
+    margin-top: 10px;
+}
+

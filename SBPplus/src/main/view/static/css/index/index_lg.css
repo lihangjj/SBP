@@ -1,0 +1,136 @@
+
+@media (min-width: 1200px) {
+    #companyTitle div:nth-child(1) {
+        font-size: 55px;
+    }
+
+    #advantage {
+        height: 100px;
+        text-align: center;
+    }
+
+    #companyTitle div:nth-child(2) {
+        font-size: 35px;
+    }
+
+    #advantage img {
+        width: 100px;
+        padding: 20px
+    }
+
+    #fengexian {
+        margin-top: -10px;
+    }
+
+    #price span, #advantage span {
+        font-family: '黑体';
+        font-size: 20px;
+        color: #000000;
+    }
+
+    #price p {
+        font-family: '等线';
+        font-size: 14px;
+        color: #646464;
+    }
+
+    #service {
+        margin-top: 50px;
+    }
+
+    #wangzhan div, #wangzhan img {
+        margin-right: -400px;
+    }
+
+    #ruanjian div, #ruanjian img {
+        margin-right: 400px;
+    }
+
+    #service *:not(#myservice) {
+        font-size: 15px;
+        font-family: "黑体";
+        color: #969696;
+    }
+
+    #service img {
+        height: 150px;
+    }
+
+    #service > div {
+        height: 800px;
+    }
+
+    #myservice {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        font-size: 30px;
+        font-family: "黑体";
+        color: #000000;
+    }
+
+    #buzhou img {
+        height: 100px;
+    }
+
+    #formDiv {
+        margin-top: -1750px;
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0.2);
+
+    }
+
+    #xiangmuyuyue input, #xiangmuyuyue select {
+        background: rgb(50, 50, 50);
+        border: solid rgb(50, 50, 50);
+        height: 50px;
+        font-size: 16px;
+        color: white;
+
+    }
+
+    #rand {
+        background: rgb(50, 50, 50);
+        border: solid rgb(50, 50, 50);
+        width: 150px;
+        height: 50px;
+    }
+
+    #xiangmuyuyue textarea {
+        background: rgb(50, 50, 50);
+        border: solid rgb(50, 50, 50);
+        height: 50px;
+        font-size: 16px;
+        color: white;
+    }
+
+    #xiangmuyuyue button {
+        height: 50px;
+        font-family: 等线;
+        border: solid #00a2e9;
+        color: black;
+        background: #00a2e9;
+        /*background: radial-gradient(circle, red, yellow, green);圆形渐变*/
+        font-size: 20px;
+
+    }
+
+    select option {
+        color: white;
+    }
+
+    #claim {
+        width: 270px;
+        height: 50px;
+        resize: none;
+        overflow-y: hidden;
+    }
+
+    #claimDiv {
+        text-align: right;
+        padding: 5px;
+    }
+
+    #logo {
+        width: 60px;
+    }
+}
