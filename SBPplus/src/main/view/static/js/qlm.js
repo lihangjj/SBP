@@ -1,3 +1,10 @@
+
+
+$("#rand").on("click", function () {
+    // var x = Math.random();
+    $("#rand").attr("src", "/defaultKaptcha")
+});//点击换验证码
+
 /**
  * 复选框批量选择
  * @param ele 要批量选择的复选框对象

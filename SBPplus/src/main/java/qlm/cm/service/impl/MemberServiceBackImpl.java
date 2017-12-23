@@ -6,7 +6,7 @@ import qlm.cm.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,57 +17,40 @@ public class MemberServiceBackImpl implements IMemberServiceBack {
     private IMemberDAO memberDAO;
 
     @Override
-    public Map<String, Object> editPre(String mid) {
-        return null;
+    public Member getMemberById(String mid) throws Exception {
+        return memberDAO.findById(mid);
     }
 
     @Override
-    public boolean edit(Member vo, Set<Integer> rid) {
-        return false;
+    public Map<String, Set<String>> getRolesAndActions(String mid) throws Exception {
+        Map<String, Set<String>> map = new HashMap<>();
+        Set<String> allRoles = memberDAO.getAllMemberRoles(mid);
+        Set<String> allActions = memberDAO.getAllMemberActions(mid);
+        map.put("allRoles", allRoles);
+        map.put("allActions", allActions);
+        return map;
     }
 
     @Override
-    public Map<String, Object> addPre() {
-        return null;
+    public Member login(Member member) throws Exception {
+
+        return memberDAO.login(member);
     }
 
     @Override
-    public boolean add(Member vo, Set<Integer> rid) {
-        return false;
+    public boolean editEflag(Member member) throws Exception {
+        return memberDAO.updateEflag(member);
     }
 
     @Override
-    public boolean editLocked(String mid, int locked) {
-        return false;
+    public Set<String> getAllMemberRoles(String mid) throws Exception {
+        return memberDAO.getAllMemberRoles(mid);
     }
 
     @Override
-    public List<Member> list() {
-        return null;
+    public Set<String> getAllMemberActions(String mid) throws Exception {
+        return memberDAO.getAllMemberActions(mid);
     }
 
-    @Override
-    public boolean editPasswordByAdmin(String mid, String password) {
-        return false;
-    }
 
-    @Override
-    public boolean editPassword(String mid, String oldPassword, String newPassword) {
-        return false;
-    }
-
-    @Override
-    public Member get(String mid) {
-        try {
-            return memberDAO.findById(mid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> listAuthByMember(String mid) {
-        return null;
-    }
 }

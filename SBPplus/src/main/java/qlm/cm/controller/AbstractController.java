@@ -4,6 +4,7 @@ package qlm.cm.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +30,9 @@ public abstract class AbstractController {
     public void setMsgAndUrl(String msg, String url, ModelAndView modelAndView) {
         modelAndView.addObject("msg", getResourceValue(msg, title));
         modelAndView.addObject("url", getResourceValue(url, title));
+    }
+    public void setMsg(String msg, Model model) {
+        model.addAttribute("msg", getResourceValue(msg, title));
     }
 
     public String getResourceValue(String key, Object... agr) {

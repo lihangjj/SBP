@@ -3,6 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qlm.cm.dao.IMemberDAO">
     <select id="findById" parameterType="Member" resultType="Member">
-        select mid,password,name,sflag,regdate,locked from member where mid=#{mid}
+        select * from member where memberid=#{memberid};
     </select>
+    <select id="getAllMemberRoles" parameterType="String" resultType="String">
+        SELECT flag from role where roleid in(
+        SELECT roleid from member_role where memberid=#{memberid});
+    </select>
+    <select id="getAllMemberActions" parameterType="String" resultType="String">
+        SELECT flag from action where actionid in(
+        SELECT actionid from role_action where roleid in(
+        SELECT roleid from member_role where memberid=#{memberid}))
+    </select>
+    <select id="login" parameterType="Member" resultType="Member">
+        SELECT * from member where memberid=#{memberid} and password=#{password}
+    </select>
+    <update id="updateEflag" parameterType="Member">
+        UPDATE member set eflag=#{eflag} where memberid=#{memberid}
+    </update>
+
 </mapper>

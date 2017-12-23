@@ -1,5 +1,8 @@
 
 @media (min-width: 992px) {
+    #backImage{
+        height: 600px;
+    }
     #logo {
         width: 40px;
     }

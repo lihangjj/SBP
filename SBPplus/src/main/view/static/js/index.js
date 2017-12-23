@@ -3,10 +3,7 @@ $(function () {
     $("#body").on("click", hiddenForm);
     $("#claim").on("click", formPlus);
     $("#modelBt").on("click", useModel);
-    $("#rand").on("click", function () {
-        // var x = Math.random();
-        $("#rand").attr("src", "/defaultKaptcha")
-    });//点击换验证码
+
     $("#xiangmuyuyue").validate({
         debug: true, // 取消表单的提交操作
         submitHandler: function (form) {

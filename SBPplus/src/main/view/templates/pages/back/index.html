@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+
+<body style="overflow-x:hidden" id="body">
+<div class="container-fluid" style="text-align: center;">
+    <div class="row">
+        <div class="col-xs-12">
+            欢迎
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/static/js/qlm.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/qlm.css}"/>
+<script type="text/javascript">
+
+    window.onload = function () {
+        $("#password").on("focus", function () {
+            $("#login").css({
+                visibility: "visible"
+            })
+        })
+    };
+
+</script>
+</html>

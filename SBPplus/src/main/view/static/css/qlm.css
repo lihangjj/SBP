@@ -1,3 +1,17 @@
 .test{
     box-shadow: 0 0 10px red;
 }
+
+/*导航条的样式*/
+#nav a {
+    color: #00a2e9;
+}
+#nav a:hover{
+    color: #F08519;
+    text-decoration: none;
+    cursor: pointer;
+}
+li{/*导航列表间距*/
+    font-size: 16px;
+    margin: 5px;
+}
