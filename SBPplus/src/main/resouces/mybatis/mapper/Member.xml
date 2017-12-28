@@ -5,12 +5,12 @@
     <select id="findById" parameterType="Member" resultType="Member">
         select * from member where memberid=#{memberid};
     </select>
-    <select id="getAllMemberRoles" parameterType="String" resultType="String">
-        SELECT flag from role where roleid in(
+    <select id="getAllMemberRoles" parameterType="String" resultType="Role">
+        SELECT * from role where roleid in(
         SELECT roleid from member_role where memberid=#{memberid});
     </select>
-    <select id="getAllMemberActions" parameterType="String" resultType="String">
-        SELECT flag from action where actionid in(
+    <select id="getAllMemberActions" parameterType="String" resultType="Action">
+        SELECT * from action where actionid in(
         SELECT actionid from role_action where roleid in(
         SELECT roleid from member_role where memberid=#{memberid}))
     </select>
@@ -20,5 +20,12 @@
     <update id="updateEflag" parameterType="Member">
         UPDATE member set eflag=#{eflag} where memberid=#{memberid}
     </update>
+
+    <select id="getAllActionsByRoleId" parameterType="int" resultType="Action">
+        SELECT * FROM ACTION WHERE actionid in(
+        SELECT actionid from role_action where roleid=#{roleid}
+        )
+
+    </select>
 
 </mapper>

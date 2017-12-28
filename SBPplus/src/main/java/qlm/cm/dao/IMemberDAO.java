@@ -1,11 +1,12 @@
 package qlm.cm.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import qlm.cm.vo.Action;
 import qlm.cm.vo.Member;
+import qlm.cm.vo.Role;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Mapper
 public interface IMemberDAO extends IDAO<String, Member> {
@@ -13,11 +14,13 @@ public interface IMemberDAO extends IDAO<String, Member> {
 
     List<Member> findAllSplit(Map<String, Object> map);
 
-    Set<String> getAllMemberRoles(String memberid);
+    List<Role> getAllMemberRoles(String memberid);
 
-    Set<String> getAllMemberActions(String memberid);
+    List<Action> getAllMemberActions(String memberid);
 
     Member login(Member member);
+
     boolean updateEflag(Member member);
 
+    List<Action> getAllActionsByRoleId(Integer roleid);
 }

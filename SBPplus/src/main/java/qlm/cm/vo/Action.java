@@ -3,7 +3,25 @@ package qlm.cm.vo;
 import java.io.Serializable;
 
 public class Action implements Serializable {
-    private String title, flag;
+    private String title,flag,sflag;
+
+    public String getSflag() {
+        return sflag;
+    }
+
+    public void setSflag(String sflag) {
+        this.sflag = sflag;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    private String url;
     private Integer actionid;
 
     public String getTitle() {

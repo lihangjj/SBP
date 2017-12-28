@@ -5,7 +5,6 @@
     }
 
     #advantage {
-        height: 100px;
         text-align: center;
     }
 
@@ -34,9 +33,6 @@
         color: #646464;
     }
 
-    #service {
-        margin-top: 50px;
-    }
 
     #wangzhan div, #wangzhan img {
         margin-right: -400px;
@@ -48,8 +44,6 @@
 
     #service *:not(#myservice) {
         font-size: 15px;
-        font-family: "黑体";
-        color: #969696;
     }
 
     #service img {
@@ -63,56 +57,31 @@
     #myservice {
         margin-top: 100px;
         margin-bottom: 100px;
-        font-size: 30px;
-        font-family: "黑体";
-        color: #000000;
     }
 
     #buzhou img {
         height: 100px;
     }
 
-    #formDiv {
-        margin-top: -1750px;
-        border-radius: 5px;
-        background: rgba(0, 0, 0, 0.2);
 
-    }
-    #backImage{
-        height: 700px;
-    }
-    #xiangmuyuyue input, #xiangmuyuyue select {
-        background: rgb(50, 50, 50);
-        border: solid rgb(50, 50, 50);
+
+    [role=form] input, [role=form] select {
         height: 50px;
-        font-size: 16px;
-        color: white;
 
     }
 
     #rand {
-        background: rgb(50, 50, 50);
-        border: solid rgb(50, 50, 50);
         width: 150px;
         height: 50px;
     }
 
-    #xiangmuyuyue textarea {
-        background: rgb(50, 50, 50);
-        border: solid rgb(50, 50, 50);
+    [role=form] textarea {
         height: 50px;
-        font-size: 16px;
-        color: white;
     }
 
-    #xiangmuyuyue button {
+    [role=form] button {
         height: 50px;
-        font-family: 等线;
-        border: solid #00a2e9;
-        color: black;
-        background: #00a2e9;
         /*background: radial-gradient(circle, red, yellow, green);圆形渐变*/
-        font-size: 20px;
 
     }
 

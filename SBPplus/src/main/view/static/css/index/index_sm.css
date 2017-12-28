@@ -11,14 +11,11 @@
     }
 
     #advantage {
-        height: 60px;
         text-align: left;
 
     }
 
-    #service {
-        margin-top: 350px;
-    }
+
 
     #companyTitle div:nth-child(2) {
         font-size: 20px;
@@ -31,22 +28,12 @@
 
     #service *:not(#myservice) {
         font-size: 12px;
-        font-family: "黑体";
-        color: #969696;
     }
 
-    #myservice {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        font-size: 20px;
-        font-family: "黑体";
-        color: #000000;
-    }
 
     #buzhou img {
         height: 60px;
     }
-    #backImage{
-        height: 300px;
-    }
+
+
 }

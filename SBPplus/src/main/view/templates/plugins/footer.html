@@ -1,11 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="footer">
 <style type="text/css">
-    #footer  {
+    #footer {
         text-align: center;
         color: #ababab;
-        background:  #2B303C;
+        background: #2B303C;
     }
-
 
     #footer a {
         color: #ababab;
@@ -16,31 +15,35 @@
         text-decoration: none;
         cursor: pointer;
     }
+
+    #pcFooter div {
+        border-right: solid #ababab
+    }
 </style>
 <div class="row hidden-xs" id="footer" style="height: 100px;padding: 20px;margin-top: 50px">
-    <div class="col-xs-12 col-xs-push-3 ">
+    <div class="col-xs-12 col-xs-push-3 " id="pcFooter">
         <div class="col-xs-1">
-            <nobr> <a>
-               关于我们
-            </a>&nbsp;|&nbsp;
-            <a>
-            联系我们
-            </a></nobr>
+            <nobr><a>关于利作</a></nobr>
+        </div>
+        <div class="col-xs-1">
+            <nobr><a>产品服务</a></nobr>
+        </div>
+        <div class="col-xs-1">
+            <nobr><a>联系我们</a></nobr>
+        </div>
+        <div class="col-xs-1">
+            <nobr><a>关注我们</a></nobr>
         </div>
     </div>
 </div>
 
-<div class=" visible-xs " id="footer"
+<div class="row visible-xs" id="footer"
      style="height: 80px;padding: 20px;margin: 10px -20px 0 -20px;">
-    <div class="row">
-        <div class="col-xs-12">
-            <nobr>Copyright 2018 &nbsp;&nbsp; cqqlm.com版权所有</nobr>
-        </div>
+    <div class="col-xs-12">
+        <nobr>Copyright 2018 &nbsp;&nbsp; cqqlm.com版权所有</nobr>
     </div>
-    <div class="row">
-        <div class="col-xs-12 ">
-            <nobr>重庆千里码网络科技有限公司</nobr>
-        </div>
+    <div class="col-xs-12 ">
+        <nobr>重庆千里码网络科技有限公司</nobr>
     </div>
 </div>
 

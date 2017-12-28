@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<body style="overflow-x:hidden" id="body">
+<div th:fragment="back_index" class="container-fluid">
+    <div th:fragment="head_menu">
+        <div class="row">
+            <div id="validateDiv">
+                <button class="glyphicon glyphicon-menu-left" id="zhedie"></button>
+                <img th:src="@{/images/index/myLogo.png}"/>
+                <span style="right:5%;top:40%;position: absolute;">
+                <button class="btn btn-primary ">消息</button>
+                <button class="btn btn-danger ">注销</button>
+            </span>
+            </div>
+        </div>
+        <div class="row">
+            <div id="menuDiv">
+                <div style="height: 20%;text-align: center">
+                    <img th:src="@{${session.photo}}" style="width: 30%;border-radius: 5px;"/>
+                    <div style="height: 50%;padding:5% 5% 0 0">
+                        <span>欢迎：<span th:text="${session.name}"></span> 光临！</span><br/>
+                    </div>
+                </div>
+
+                <div id="role" th:each="role:${session.allRoles}">
+                    <div id="title" th:text="${role.title}"></div>
+                    <span class="glyphicon glyphicon-chevron-down" style="position: absolute;right: 1%;"></span>
+                        <div  th:if="${action.sflag}==1" id="action" th:href="${action.url}" th:each="action:${role.actions}">
+                            <nobr th:text="${action.title}"></nobr>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -10,13 +10,11 @@
 }
 
 #companyTitle div:nth-child(1) {
-    margin-top: -22%;
     color: #00a2e9;
     font-size: 20px;
 }
 
-#advantage {
-    height: 30px;
+#advantage{
     background: white;
     text-align: left;
 }
@@ -39,12 +37,12 @@
     font-family: '等线';
     font-size: 12px;
     color: #969696;
+    width: 90%;display: block
 }
 
 .title {
     font-family: '黑体';
     font-size: 14px;
-    color: #000000;
 }
 
 #service img {
@@ -59,22 +57,18 @@
     margin-right: 0;
 }
 
-#service {
-    margin-top: 370px;
-}
+
 
 #service *:not(#myservice) {
     font-size: 12px;
     font-family: "黑体";
-    color: #969696;
+
 }
 
 #myservice {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 20px;
     font-family: "黑体";
-    color: #000000;
 }
 
 #service > div {
@@ -85,19 +79,21 @@
     height: 40px;
 }
 
-#xiangmuyuyue input, #xiangmuyuyue select {
+[role=form] input, [role=form] select {
     font-family: "等线";
     margin: 5px 0 5px 0;
 }
 
-#xiangmuyuyue button {
+[role=form] button {
     font-family: "等线";
     margin: 5px 0 5px 0;
+
 }
 
-#xiangmuyuyue textarea {
+[role=form] textarea {
     font-family: "等线";
     margin-bottom: 0px;
+
 }
 
 #claimDiv {
@@ -109,10 +105,10 @@
 
 }
 
-#xiangmuyuyue button {
-    border: solid #00a2e9;
+[role=form] button {
     color: black;
     background: #00a2e9;
+    border: none;
 }
 #logo {
     width: 30px;
@@ -122,6 +118,3 @@
 }
 
 
-#backImage{
-    height: 200px;
-}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<style type="text/css">
+    #zhedieDiv {
+        text-align: center;
+        height: 100%;
+        color: #d3d3d3;
+        border-bottom: solid rgba(200, 200, 200, 0.3) 1px;
+
+    }
+
+    #validateDiv {
+        background: rgb(38, 50, 56);
+        height: 10%;
+        width: 100%;
+        position: absolute;
+
+    }
+
+    #validateDiv img { /*logo的位置*/
+        height: 70%;
+        width: auto;
+        left: 21%;
+        position: absolute;
+        top: 25%
+    }
+
+    #role {
+        position: relative;
+    }
+
+    #role div:nth-child(1) {
+        margin: -5% 0 -5% -10%;
+    }
+
+    #role div:nth-child(2) {
+        float: right;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10%
+    }
+
+    #zhedie {
+        height: 99%;
+        color: #d3d3d3;
+        border: none;
+        width: 20%;
+        background: rgb(38, 50, 56);
+    }
+
+    #zhedie:hover {
+        background: rgb(64, 89, 102);
+
+    }
+
+    #menuDiv {
+        min-height: 90%;
+        background: rgb(38, 50, 56);
+        transition: 1s;
+        position: absolute;
+        top: 10%;
+        float: left;
+        color: #d3d3d3;
+        font-size: 10px;
+    }
+
+    #action {
+        display: none;
+        font-size: 8px;
+    }
+
+    #contentDiv {
+        transition: 1s;
+        position: absolute;
+        right: 0;
+        top: 10%;
+        min-height: 90%;
+        background: #ffe9e6
+    }
+
+    @media (min-width: 680px) {
+        #menuDiv {
+            font-size: 12px;
+            top: 15%;
+        }
+
+        #action {
+            font-size: 10px;
+        }
+
+        #validateDiv {
+            height: 15%;
+        }
+
+        #contentDiv {
+            top: 15%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        #menuDiv {
+            font-size: 15px;
+            top: 10%;
+        }
+
+        #action {
+            font-size: 13px;
+        }
+
+        #validateDiv {
+            height: 10%;
+        }
+
+        #contentDiv {
+            top: 10%;
+        }
+
+        #zhedie {
+            width: 10%;
+        }
+
+        #validateDiv img { /*logo的位置*/
+            left: 11%;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        #menuDiv {
+            top: 8%;
+        }
+
+        #validateDiv {
+            height: 8%;
+        }
+
+        #contentDiv {
+            top: 8%;
+        }
+    }
+
+    #menuDiv > div {
+        padding: 5% 0 5% 5%;
+        border-top: solid rgba(200, 200, 200, 0.3) 1px;
+    }
+
+    #menuDiv > div > div {
+        padding: 5% 0 5% 10%;
+
+    }
+
+    #menuDiv div {
+        cursor: pointer;
+    }
+
+    #menuDiv > div > div:hover {
+        cursor: pointer;
+        background: rgb(64, 89, 102);
+    }
+</style>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<body style="overflow-x:hidden" id="body">
+<div class="container-fluid" >
+    <div th:replace="plugins/back_index_replace::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <h1>增加成功页面</h1>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/js/qlm.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/qlm.css}"/>
+
+</html>

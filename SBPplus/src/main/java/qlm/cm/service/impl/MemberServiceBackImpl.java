@@ -1,14 +1,14 @@
 package qlm.cm.service.impl;
 
-import qlm.cm.dao.IMemberDAO;
-import qlm.cm.service.IMemberServiceBack;
-import qlm.cm.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import qlm.cm.dao.IMemberDAO;
+import qlm.cm.service.IMemberServiceBack;
+import qlm.cm.vo.Action;
+import qlm.cm.vo.Member;
+import qlm.cm.vo.Role;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MemberServiceBackImpl implements IMemberServiceBack {
@@ -17,18 +17,23 @@ public class MemberServiceBackImpl implements IMemberServiceBack {
     private IMemberDAO memberDAO;
 
     @Override
-    public Member getMemberById(String mid) throws Exception {
-        return memberDAO.findById(mid);
+    public Member getMemberById(String mid) {
+        try {
+            return memberDAO.findById(mid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
-    public Map<String, Set<String>> getRolesAndActions(String mid) throws Exception {
-        Map<String, Set<String>> map = new HashMap<>();
-        Set<String> allRoles = memberDAO.getAllMemberRoles(mid);
-        Set<String> allActions = memberDAO.getAllMemberActions(mid);
-        map.put("allRoles", allRoles);
-        map.put("allActions", allActions);
-        return map;
+    public List<Role> getRolesAndActions(String mid){
+        List<Role> allRoles = memberDAO.getAllMemberRoles(mid);//实体类
+
+        for (Role x : allRoles) {
+            x.setActions(memberDAO.getAllActionsByRoleId(x.getRoleid()));
+        }
+        return allRoles;
     }
 
     @Override
@@ -43,13 +48,24 @@ public class MemberServiceBackImpl implements IMemberServiceBack {
     }
 
     @Override
-    public Set<String> getAllMemberRoles(String mid) throws Exception {
-        return memberDAO.getAllMemberRoles(mid);
+    public Set<String> getAllMemberRolesFlag(String mid) throws Exception {
+        List<Role> allRolesV = memberDAO.getAllMemberRoles(mid);//实体类
+        Set<String> allRoles = new HashSet<>();
+        for (Role x : allRolesV) {
+            allRoles.add(x.getFlag());
+        }
+        return allRoles;
     }
 
     @Override
-    public Set<String> getAllMemberActions(String mid) throws Exception {
-        return memberDAO.getAllMemberActions(mid);
+    public Set<String> getAllMemberActionsFlag(String mid) throws Exception {
+        List<Action> allActionsV = memberDAO.getAllMemberActions(mid);
+        Set<String> allActions = new HashSet<>();
+
+        for (Action x : allActionsV) {
+            allActions.add(x.getFlag());
+        }
+        return allActions;
     }
 
 
