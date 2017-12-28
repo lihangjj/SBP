@@ -1,18 +1,15 @@
 
-.font2{/*2级字体：手机20，平板23，电脑26，大电脑30px,其他35px*/
-
-}
 /*导航条的样式*/
 #nav a {
     color: #00a2e9;
 }
-#nav a:hover{
+#nav a:hover {
     color: #F08519;
     text-decoration: none;
     cursor: pointer;
 }
 
-li{/*导航列表间距*/
+li { /*导航列表间距*/
     font-size: 16px;
     margin: 5px;
 }

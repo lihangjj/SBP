@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden;">
 <head th:replace="plugins/include_javascript::js"></head>
 <body style="overflow-x:hidden" id="body">
 <div class="container-fluid" style="text-align: center;">
@@ -13,13 +13,46 @@
             </div>
             <img id="backImage" class="img-responsive" th:src="@{/images/pages/front/service/service_b1.jpg}"
                  style="position: absolute;"/>
+            <div id="titleDiv"
+                 style="z-index:1;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);vertical-align: middle;">
+                <img th:src="@{/images/index/myLogo.png}" style="width: 30%"/>
+                <nobr style="color: white;font-size: 4rem;">利作·优质服务</nobr>
+            </div>
+
         </div>
     </div>
-
+    <div class="row" id="shanchang" style="background: #f5f5f5">
+        <div class="col-xs-12">
+            <div style="margin: 5% 0 5% 0;font-size:6rem">擅长领域</div>
+            <div style="margin: 0 0 5% 0;font-size:2rem">尺有所短，寸有所长</div>
+        </div>
+        <div class="col-xs-12" style="padding: 10px;" id="realm">
+            <div class="col-xs-6 col-sm-2 col-sm-push-2">
+                <img th:src="@{/images/pages/front/service/chuangyi.png}"/>
+                <div id="sctitle">项目创意</div>
+                <div id="scContent">让网站更加出众，让访客可以记住您的网...</div>
+            </div>
+            <div class="col-xs-6 col-sm-2 col-sm-push-2">
+                <img th:src="@{/images/pages/front/service/fabu.png}"/>
+                <div id="sctitle">发布部署</div>
+                <div id="scContent">部署到多个服务器，全球CDN加速访问</div>
+            </div>
+            <div class="col-xs-6 col-sm-2 col-sm-push-2" id="gongneng">
+                <img th:src="@{/images/pages/front/service/gongneng.png}"/>
+                <div id="sctitle">功能实现</div>
+                <div id="scContent">将想法变成可以使用的网站功能以及用户...</div>
+            </div>
+            <div class="col-xs-6 col-sm-2 col-sm-push-2">
+                <img th:src="@{/images/pages/front/service/guihua.png}"/>
+                <div id="sctitle">项目规划</div>
+                <div id="scContent">规划项目栏目和功能</div>
+            </div>
+        </div>
+    </div>
     <div class="row" id="service">
         <div class="col-xs-12 "
              style=" background-image: url('../images/index/b3.jpg');" id="ourService">
-            <div class="col-xs-12 font2" id="myservice">我们能开发的项目</div>
+            <div class="col-xs-12 font2" id="myservice" style="font-size: 6rem">我们能开发的项目</div>
             <div id="goClaim">
                 <div>
                     <div class="col-xs-4 col-md-5 "><img th:src="@{/images/index/wangzhanjianshe.png}"/>
@@ -81,7 +114,7 @@
 
     </div><!--手机界面显示服务内容-->
     <hr/>
-    <div id="myservice" class="font2">服务流程</div>
+    <div id="myservice" style="font-size: 6rem">服务流程</div>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-push-3" id="buzhou" style="padding: 15px;">
             <div class="col-xs-3"><img th:src="@{/images/index/buzhou1.png}"/></div>
@@ -110,9 +143,41 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/index/index_md.css}"/>
 <link rel="stylesheet" type="text/css" th:href="@{/css/index/index_lg.css}"/>
 <style type="text/css">
+
+    #realm > div {
+        padding: 20px;
+        transition: 0.5s;
+        border-radius: 5px;
+    }
+
+    #realm > div:hover {
+        box-shadow: 0 0 10px #969696;
+        transform: translateY(10px);
+    }
+
+    html * {
+        font-family: '黑体';
+    }
+
+    #sctitle {
+        color: red;
+        margin: 10px;
+        font-size: 3.5rem;
+    }
+
+    #scContent {
+        font-size: 2.5rem
+    }
+
     #logo {
         animation: rotateY 5s infinite;
         -webkit-animation: rotateY 5s infinite;
+    }
+
+    #service a:hover {
+        color: #F08519;
+        text-decoration: none;
+        cursor: pointer;
     }
 
     @keyframes rotateY {
@@ -144,24 +209,6 @@
         transform: scale(1.2);
     }
 
-    a {
-        color: #969696;
-    }
-
-    a:hover {
-        color: #F08519;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .title {
-        background-image: -webkit-linear-gradient(left, #ffa900 1%, #000000 5%);
-        -webkit-text-fill-color: transparent; /* 将字体设置成透明色 */
-        -webkit-background-clip: text; /* 裁剪背景图，使文字作为裁剪区域向外裁剪 */
-        -webkit-background-size: 200% 100%;
-        -webkit-animation: masked-animation 5s linear infinite;
-    }
-
     @keyframes masked-animation {
         0% {
             background-position: 0 0;
@@ -181,11 +228,4 @@
     }
 
 </style>
-<script type="text/javascript">
-    $(function () {//让文本框获得焦点
-        $("#goClaim *").click(function () {
-            $("[name=claim]").focus();
-        })
-    })
-</script>
 </html>

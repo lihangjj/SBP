@@ -1,11 +1,12 @@
 .row > div { /*设置与屏幕的*/
     padding: 0;
 }
-
+html *{
+    font-family: '黑体';
+}
 #companyTitle div {
     text-align: center;
     white-space: nowrap;
-    font-family: '黑体';
     padding: 5px
 }
 
@@ -41,7 +42,6 @@
 }
 
 .title {
-    font-family: '黑体';
     font-size: 14px;
 }
 
@@ -61,14 +61,12 @@
 
 #service *:not(#myservice) {
     font-size: 12px;
-    font-family: "黑体";
 
 }
 
 #myservice {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-family: "黑体";
 }
 
 #service > div {
