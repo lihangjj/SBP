@@ -1,9 +1,7 @@
 .row > div { /*设置与屏幕的*/
     padding: 0;
 }
-html *{
-    font-family: '黑体';
-}
+
 #companyTitle div {
     text-align: center;
     white-space: nowrap;
@@ -35,7 +33,7 @@ html *{
 }
 
 .phone {
-    font-family: '等线';
+
     font-size: 12px;
     color: #969696;
     width: 90%;display: block
@@ -78,18 +76,18 @@ html *{
 }
 
 [role=form] input, [role=form] select {
-    font-family: "等线";
+
     margin: 5px 0 5px 0;
 }
 
 [role=form] button {
-    font-family: "等线";
+
     margin: 5px 0 5px 0;
 
 }
 
 [role=form] textarea {
-    font-family: "等线";
+
     margin-bottom: 0px;
 
 }
@@ -108,11 +106,6 @@ html *{
     background: #00a2e9;
     border: none;
 }
-#logo {
-    width: 30px;
-}
-#logoDiv{
-    margin-top: 20px;
-}
+
 
 

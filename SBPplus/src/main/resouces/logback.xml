@@ -34,7 +34,7 @@
 		<appender-ref ref="ACCESS" />
 	</logger>
 	<logger name="druid.sql.Statement" level="DEBUG" />
-	<logger name="qlm.cm.dao" level="TRACE" />
+	<logger name="lz.cm.dao" level="TRACE" />
 
 	<root level="INFO">
 		<appender-ref ref="DETAIL" />

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.min.css}"/>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.min.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.zh-CN.js}"></script>
+
+<script type="text/javascript ">
+    $(function () {
+
+        $("#formDiv").validate({
+            debug: true, // 取消表单的提交操作
+            submitHandler: function (form) {
+                form.submit(); // 提交表单
+                showLoadingData();
+            },
+            errorPlacement: function (error, element) {
+                $("#" + $(element).attr("id") + "Msg").append(error);
+            },
+            highlight: function (element, errorClass) {
+                $(element).fadeOut(1, function () {
+                    $(element).fadeIn(1, function () {
+                        $(element).css({
+                            "box-shadow": "0 0 10px rgba(255,0,0,1)"
+                        })
+                    });
+
+                })
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).fadeOut(1, function () {
+                    $(element).fadeIn(1, function () {
+                        $(element).css({
+                            "box-shadow": "0 0 10px rgba(0,255,0,1)"
+                        });
+                    });
+                })
+            },
+            errorClass: "text-danger",
+            messages: {
+                name: "请输入岗位名称"
+
+            },
+            rules: {
+                name: {
+                    required: true
+
+                },
+                duty: {
+                    required: true
+                },
+                note: {
+                    required: true
+                },
+                welfare: {
+                    required: true
+                },
+                salRange: {
+                    required: true
+                },
+                workLoc: {
+                    required: true
+
+                },
+                phone: {
+                    required: true
+
+                }
+            }
+        });
+
+    })
+</script>
+
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">发布职位</div>
+        <div class="row">
+            <div class="col-xs-10 col-xs-push-1 " style="border: solid #d3d3d3 1px;border-radius: 5px;">
+                <form class="form" id="formDiv"
+                      th:action="@{/pages/back/post/add}">
+                    <div class="form-inline form-group ">
+                        <label>岗位名称：</label>
+                        <input class="form-control" type="text" placeholder="请输入名称（必填）" name="name" th:id="name"/>
+                        <span th:id="nameMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>岗位职责：</label>
+                        <textarea class="form-control" id="duty" name="duty" placeholder="请输入职责（必填）">
+                        </textarea>
+                        <span th:id="dutyMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>任职要求：</label>
+                        <textarea class="form-control" id="note" name="note" placeholder="请输入要求（必填）"></textarea>
+                        <span th:id="noteMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>相关福利：</label>
+                        <textarea class="form-control" id="welfare" name="welfare"
+                                  placeholder="请输入福利（必填）">1、底薪+提成+奖金+补贴+绩效+五险一金+年终奖+团队业绩奖励；
+2、做五休二、OFFICE作息时间，公司追求极致的扁平化管理，工作氛围轻松，无需加班；
+3、国内外法定节假日休息，每月半天积休，圣诞、万圣、Bank Holiday休息；
+4、一年两次国内外旅游、带薪年假、带薪病假、婚假、产假、免费体检等；
+5、公司休闲区免费提供下午茶与点心，每月组织至少两次员工聚餐或户外活动；
+6、我们能够为你提供：广阔的职业能力提升平台，公平的职位晋升模式，5A级的办公环境，融洽的工作氛围，优秀的90后团队同事。</textarea>
+                        <span th:id="welfareMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>工资范围：</label>
+                        <input class="form-control" type="text" id="salRange" name="salRange" placeholder="请输入范围（必填）"/>
+                        <span th:id="salRangeMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>工作地点：</label>
+                        <select class="form-control" id="workLoc" name="workLoc">
+                            <option>重庆</option>
+                        </select>
+                        <span th:id="workLocMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group " >
+                        <label>招聘人数：</label>
+                        <select class="form-control" id="recruits" name="recruits">
+                            <option>若干</option>
+                            <option>1个</option>
+                            <option>2个</option>
+                            <option>3个</option>
+                            <option>5个</option>
+                            <option>6个</option>
+                        </select>
+                        <span th:id="recruitsMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group " >
+                        <label>工作经验：</label>
+                        <select class="form-control" id="experience" name="experience">
+                            <option>不限</option>
+                            <option>1年以上</option>
+                            <option>2年以上</option>
+                            <option>3年以上</option>
+                            <option>5年以上</option>
+                            <option>8年以上</option>
+                        </select>
+                        <span th:id="recruitsMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>学历要求：</label>
+                        <select class="form-control" id="education" name="education">
+                            <option>不限</option>
+                            <option>中专</option>
+                            <option>大专</option>
+                            <option>本科</option>
+                            <option>硕士</option>
+                            <option>博士</option>
+                        </select>
+                        <span th:id="educationMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>其他要求：</label>
+                        <textarea class="form-control" id="other" name="other"></textarea>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>联系电话：</label>
+                        <input class="form-control" type="text" id="phone" name="phone"
+                               placeholder="请输入电话+姓名（必填）"/>
+                        <span th:id="phoneMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <button type="submit" class="btn btn-success">发布职位</button>
+                        <a th:href="@{/pages/back/loginSuccess}">
+                            <button class="btn btn-danger" type="button">取消发布</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

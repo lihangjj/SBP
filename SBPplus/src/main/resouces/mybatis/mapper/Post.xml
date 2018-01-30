@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lz.cm.dao.IPostDAO">
+
+    <!--增加成本-->
+    <insert id="doCreate">
+        INSERT INTO post(memberid,name,duty,note,welfare,salRange,workLoc,recruits,education,other,phone,pubDate,experience)VALUES
+        (#{memberid},#{name},#{duty},#{note},#{welfare},#{salRange},#{workLoc},#{recruits},#{education},#{other},#{phone},#{pubDate},#{experience});
+    </insert>
+
+    <!--用户分页IDAO中有-->
+    <!--单修改dflag-->
+    <update id="updateDflag">
+        UPDATE post set dflag=#{dflag} WHERE postid=#{postid}
+    </update>
+
+    <update id="doUpdate">
+    UPDATE post set name=#{name},duty=#{duty},note=#{note},welfare=#{welfare},salRange=#{salRange},workLoc=#{workLoc},
+    recruits=#{recruits},education=#{education},other=#{other},phone=#{phone},pubDate=#{pubDate},experience=#{experience},memberid=#{memberid} WHERE postid=#{postid}
+    </update>
+
+</mapper>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<link type="text/css" rel="stylesheet" th:href="@{/bootstrap/colorPicker/bootstrap-colorpicker.min.css}"/>
+<script type="text/javascript" th:src="@{/bootstrap/colorPicker/bootstrap-colorpicker.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<style type="text/css">
+
+</style>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">字体风格设置</div>
+        <div class="row">
+            <div class="col-xs-10 col-xs-push-1">
+                <form action="/pages/back/system/setFont" method="post"
+                      style="margin-bottom: 20rem;">
+                    <div class="form-inline form-group">
+                        <label>系统字体选择：</label>
+                        <select name="sysFont" class="form-control">
+                            <option value="null" th:selected="${session.sysFont=='null'?true:false}">默认</option>
+                            <option value="仿宋" th:selected="${session.sysFont=='仿宋'?true:false}">仿宋</option>
+                            <option value="宋体" th:selected="${session.sysFont=='宋体'?true:false}">宋体</option>
+                            <option value="新宋体" th:selected="${session.sysFont=='新宋体'?true:false}">新宋体</option>
+                            <option value="等线" th:selected="${session.sysFont=='等线'?true:false}">等线</option>
+                            <option value="Consolas" th:selected="${session.sysFont=='Consolas'?true:false}">Consolas
+                            </option>
+                            <option value="黑体" th:selected="${session.sysFont=='黑体'?true:false}">黑体</option>
+                            <option value="微软雅黑" th:selected="${session.sysFont=='微软雅黑'?true:false}">微软雅黑</option>
+                            <option value="微软正黑体" th:selected="${session.sysFont=='微软正黑体'?true:false}">微软正黑体</option>
+                            <option value="楷体" th:selected="${session.sysFont=='楷体'?true:false}">楷体</option>
+                        </select>
+                    </div>
+                    <div class="form-inline form-group">
+                        <label>系统字体颜色：</label>
+                        <div id="fontColor" class="input-group colorpicker-component">
+                            <input type="text" class="form-control" placeholder="不选则为默认"
+                                   name="sysColor"
+                                   th:value="${session.sysColor.contains(')')?session.sysColor:null}"
+
+                            />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                    </div>
+                    <div class="form-inline form-group">
+                        <label>菜单字体颜色：</label>
+                        <div id="menuFontColor" class="input-group colorpicker-component">
+                            <input type="text" class="form-control" placeholder="不选则为默认"
+                                   name="menuFontColor"
+                                   th:value="${session.menuFontColor.contains(')')?session.menuFontColor:null}"
+
+                            />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                    </div>
+                    <div class="form-inline form-group">
+                        <label>菜单选中颜色：</label>
+                        <div id="menuItemColor" class="input-group colorpicker-component">
+                            <input type="text" class="form-control" placeholder="不选则为默认"
+                                   name="menuSelectedColor"
+                                   th:value="${session.menuSelectedColor.contains(')')?session.menuSelectedColor:null}"
+
+                            />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                    </div>
+                    <div class="form-inline form-group">
+                        <label>菜单背景颜色：</label>
+                        <div id="menuBackColor" class="input-group colorpicker-component">
+                            <input type="text" class="form-control" placeholder="不选则为默认"
+                                   name="menuColor"
+                                   th:value="${session.menuColor.contains(')')?session.menuColor:null}"
+                            />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                    </div>
+                    <div style="padding: 5rem">
+                        <button class="btn btn-success" style="margin: 1rem" type="submit">提交</button>
+                        <a th:href="@{/pages/back/loginSuccess}">
+                            <button class="btn btn-danger" style="margin: 1rem" type="button">取消</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#fontColor").colorpicker();
+        $("#menuFontColor").colorpicker();
+        $("#menuItemColor").colorpicker();
+        $("#menuBackColor").colorpicker();
+
+        $(".colorpicker-component span").popover({
+            title: "提示：",
+            content: "rgba(r,g,b,a)中的a为透明度，范围值[0~1],越小越透明",
+            placement: "auto",
+            html: true
+        });
+        $(".colorpicker-component span").on({
+            mouseleave: function () {
+                $(this).popover("hide")
+            }
+        })
+
+
+    })
+</script>
+</body>
+
+</html>

@@ -27,7 +27,6 @@
     }
 
     #price p {
-        font-family: '等线';
         font-size: 14px;
         color: #646464;
     }
@@ -100,7 +99,5 @@
         padding: 5px;
     }
 
-    #logo {
-        width: 60px;
-    }
+
 }

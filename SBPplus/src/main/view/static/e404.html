@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<body style="overflow-x:hidden;background: rgba(0,0,0,0.3);visibility: hidden" id="body">
+<div class="container-fluid" style="margin-top: 10%">
+
+    <div class="row">
+        <div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-3">
+            <div class="panel panel-danger" style="text-align: center">
+                <div class="panel-heading">错误的请求！</div>
+                <div class="panel-body">
+                    <div style="text-align: center">
+                        <p th:each="msgEntry,errS:${msg}">
+                            <span th:text="${msgEntry.key}+':'"/>
+                            <spap th:text="${msgEntry.value}"/>
+                        </p>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-success" id="bt">回到首页</button>
+                    <a href="javascript:history.go(-1);">
+                        <button class="btn btn-success">返回</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $("#bt").click(function () {
+            window.location = "/";
+        })
+    })
+
+</script>
+
+
+</html>

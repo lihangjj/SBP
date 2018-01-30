@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:replace="plugins/include_javascript::js"></head>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+
+<div class="row" th:fragment="search">
+    <div class="col-xs-10 col-xs-push-1">
+        <form>
+            <input type="hidden" id="lineSize" name="lineSize" th:value="${lineSize}"/>
+            <div style="padding: 10px" class="form-inline">
+                <label>请选择查询方式：</label>
+                <select class="form-control" id="column" name="column">
+                    <option th:each="columnEntry:${columnMap}"
+                            th:text="${columnEntry.key}" th:value="${columnEntry.value}"
+                            th:selected="${columnEntry.value==column?'true':'false'}"></option>
+                </select>
+                <label>&nbsp;请输入查询关键字</label>
+                <input class="form-control" style="font-weight: bold"
+                       type="text" id="keyWord" name="keyWord"
+                />
+                <input class="btn btn-primary" id="jiansuo" type="button" value="检索"/>
+                <label>一共查询到</label>
+                <label style="color: red;font-size: 3rem" id="allRecorders"></label>
+                <label>条数据,共</label>
+                <label style="color: red;font-size: 3rem" id="pageSize"></label>
+                <label>页</label>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -16,36 +16,96 @@
         cursor: pointer;
     }
 
-    #pcFooter div {
-        border-right: solid #ababab
+    #title {
+        border-right: solid #ababab;
+        font-size: 1.6rem;
     }
+
+    #title ~ div {
+        font-size: 1.4rem;
+        margin: 10px;
+    }
+
 </style>
-<div class="row hidden-xs" id="footer" style="height: 100px;padding: 20px;margin-top: 50px">
-    <div class="col-xs-12 col-xs-push-3 " id="pcFooter">
-        <div class="col-xs-1">
-            <nobr><a>关于利作</a></nobr>
+<div class="row hidden-xs" id="footer" style="padding: 20px;margin-top: 50px;">
+
+    <div class="col-xs-12 col-xs-push-2 " id="pcFooter">
+        <div class="col-xs-2">
+            <div id="title">
+                <nobr><a th:href="@{/about}">关于利作</a></nobr>
+            </div>
+            <div>
+                <a th:href="@{/about}">
+                    <nobr>利作是一家...</nobr>
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/pages/front/post/list}">
+                    <nobr>加入我们</nobr>
+                </a>
+            </div>
         </div>
-        <div class="col-xs-1">
-            <nobr><a>产品服务</a></nobr>
+        <div class="col-xs-2">
+            <div id="title">
+                <nobr><a>产品服务</a></nobr>
+            </div>
+            <div>
+                <nobr><a>一站式建站</a></nobr>
+            </div>
+            <div>
+                <nobr><a>定制软件开发</a></nobr>
+            </div>
+            <div>
+                <nobr><a>IT外包项目</a></nobr>
+            </div>
+
         </div>
-        <div class="col-xs-1">
-            <nobr><a>联系我们</a></nobr>
+        <div class="col-xs-2">
+            <div id="title">
+                <nobr>
+                    <a id="lxwm">联系我们</a>
+                    <span></span>
+                </nobr>
+            </div>
+            <div>
+                <nobr>
+                    <a id="lxdh">联系电话</a>
+                    <span></span>
+                </nobr>
+            </div>
+            <div>
+                <nobr>
+                    <a id="gsgw">公司官网</a>
+                    <span></span>
+                </nobr>
+            </div>
+            <div>
+                <nobr>
+                    <a id="gsdz">公司地址</a>
+                    <span></span>
+                </nobr>
+            </div>
         </div>
-        <div class="col-xs-1">
-            <nobr><a>关注我们</a></nobr>
+        <div class="col-xs-2">
+            <div id="title">
+                <nobr><a>关注我们</a></nobr>
+            </div>
+            <div class="col-xs-12" style="border-right: none;text-align: left;height: 10%">
+                <img th:src="@{/images/client/front/myErweima.png}"/>
+
+            </div>
         </div>
+
     </div>
 </div>
 
 <div class="row visible-xs" id="footer"
      style="height: 80px;padding: 20px;margin: 10px -20px 0 -20px;">
     <div class="col-xs-12">
-        <nobr>Copyright 2018 &nbsp;&nbsp; cqqlm.com版权所有</nobr>
+        <nobr>Copyright 2018 &nbsp;&nbsp; cqliz.cn版权所有</nobr>
     </div>
     <div class="col-xs-12 ">
-        <nobr>重庆千里码网络科技有限公司</nobr>
+        <nobr>重庆利作网络科技有限公司</nobr>
     </div>
 </div>
-
-
 </html>

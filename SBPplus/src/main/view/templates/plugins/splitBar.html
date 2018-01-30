@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:replace="plugins/include_javascript::js"></head>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+
+<div class="row" th:fragment="splitBar">
+    <div class="col-xs-12  form-inline" style=" padding: 0 3rem 0 3rem;"
+         th:id="daomei">
+    </div>
+    <div class="col-xs-12 " style="padding: 0 3rem 10rem 3rem;">
+        <ul class="pagination" id="splitBar" >
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

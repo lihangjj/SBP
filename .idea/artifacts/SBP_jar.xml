@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="SBP:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/SBP_jar</output-path>
-    <root id="archive" name="SBP.jar">
-      <element id="module-output" name="SBP" />
-    </root>
-  </artifact>
-</component>

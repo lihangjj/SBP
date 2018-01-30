@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden;">
+<head th:replace="plugins/include_javascript::js">
+</head>
+<body style="overflow-x:hidden;visibility: hidden;" id="body">
+<script type="text/javascript" th:src="@{/js/pages/front/service/service.js}"></script>
+<script type="text/javascript" th:src="@{/js/pages/front/about/about.js}"></script>
+<script type="text/javascript"  th:src="@{/js/pages/front/front.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/pages/front/about/about.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/pages/front/front.css}"/>
+
+<div class="container-fluid" style="text-align: center;">
+    <!--导航条-->
+    <div th:replace="plugins/navbar::navbar"></div>
+    <!--千里码logo-->
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="logoDiv" class="col-xs-1 col-xs-push-1" style="z-index:1;position: absolute;">
+                <img th:src="@{/images/index/myLogodaizi.png}" id="logo"/>
+            </div>
+            <img id="backImage" class="img-responsive" th:src="@{/images/pages/front/about/team.jpg}"
+                 style="position: absolute;left: 0"/>
+            <div id="titleDiv">
+                <nobr style="color: white;font-size: 4rem;">企业简介·开发团队</nobr>
+                <p style="color: white;font-size: 2.6rem;">
+                    <span style="color: #ed077d">利作</span>软件公司, 是一家以高科技创意为核心的技术服务公司, 聚集了众多对软件开发和界面设计有独特创意的高端人才,
+                    致力于为企业提供软件开发, 网站建设, 网页设计, IT外包, 手机应用开发, 互联网营销, 微信平台开发等解决方案。
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" id="shanchang"
+         th:style="'background:url(' + @{/images/pages/front/about/about_b3.jpg} + ');background-size: cover '"
+         style="background: #f5f5f5">
+        <div class="col-xs-12">
+            <div style="margin: 5% 0 5% 0;font-size:5rem">开发团队</div>
+            <div style="margin: 0 0 5% 0;font-size:2rem">术业有专攻，年轻无极限</div>
+        </div>
+        <div class="col-xs-12" style="display:flex;">
+            <div class="col-xs-4" style="padding: 10px; text-align: right;" id="realm">
+                <img th:src="@{/images/pages/front/about/jzg.png}" id="jiazhi"
+                     style="transform: scale(1.8); margin-top:10%;margin-right: 10%"/>
+            </div>
+            <div class="col-xs-8" style="padding: 10px; text-align: left;" id="jiazhiguan">
+                <div id="one">创新与协作：</div>
+                <div id="two">我们是一支年轻，具有创新精神的团队，敢于创新，大胆创新，科学创新！团队配合融洽，分工明确！</div>
+                <div id="one">责任与忠诚：</div>
+                <div id="two">我们时刻以用户为中心，将用户的利益放在首要位置，责任、担当长留心中！</div>
+                <div id="one">正直与追求：</div>
+                <div id="two">我们做的不仅仅是工作，更是对人生价值的一种追求，成就美好的人生历程！</div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="plugins/footer::footer"></div>
+</div>
+</body>
+</html>

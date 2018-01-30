@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<style type="text/css">
+    #dntb tr td,#shouji tr td{
+        vertical-align: middle;
+
+    }
+</style>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <div id="hisRoleWindow" class="modal fade" aria-labelledby="title" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center">
+                    <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <label id="hisRoleTitle">此用户拥有的角色如下：</label>
+                </div>
+                <div class="modal-body">
+                    <table class="table  table-hover" style="text-align: center" id="hisRoleTable">
+                        <tr id="hisRole-row">
+                            <td>角色ID</td>
+                            <td>角色名称</td>
+                            <td>角色标记</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <small style="text-align: center;font-size: 1rem;color: gray">Esc键、或单机灰色区域关闭窗口</small>
+                    <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="addRoleWindow" class="modal fade" aria-labelledby="title" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center">
+                    <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <label id="modalTitle">为选定用户增加角色,请选择角色</label>
+                </div>
+                <div class="modal-body">
+                    <table class="table  table-hover  " style="text-align: center" id="roletb">
+                        <tr id="role-row">
+                            <td>多选</td>
+                            <td>角色ID</td>
+                            <td>角色名称</td>
+                            <td>角色标记</td>
+                        </tr>
+                    </table>
+                    <div class="form-inline hidden-xs" >
+                        <input type="checkbox" style="width: 10%" class="form-control" id="checkAllRole"/>全选
+                        <button class="btn btn-success" id="plRoleAddToMember">将选中角色添加至选中用户</button>
+                        <button class="btn btn-warning" id="plRoleRemoveFromMember">将选中角色从用户移除</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                    <table class="table  table-hover table-responsive" style="text-align: center">
+                        <tr class="visible-xs">
+                            <td colspan="4">
+                                <input type="checkbox" id="checkAllRole"
+                                       class="form-control checkbox-inline"/><span></span>全选
+                            </td>
+                        </tr>
+                        <tr class="visible-xs">
+                            <td colspan="4">
+                                <button class="btn  btn-success " id="plRoleAddToMember">将选中角色添加至选中用户</button>
+                            </td>
+                        </tr>
+                        <tr class="visible-xs">
+                            <td colspan="4">
+                                <button class="btn btn-warning " id="plRoleRemoveFromMember">将选中角色从用户移除</button>
+                            </td>
+                        </tr>
+                        <tr class="visible-xs">
+                            <td colspan="4">
+                                <button class="btn btn-info " data-dismiss="modal">取消</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <small style="text-align: center;font-size: 1rem;color: gray">Esc键、或单机灰色区域关闭窗口</small>
+                    <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">用户列表</div>
+        <div th:replace="plugins/search::search"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table id="dntb" class="table  table-hover table-responsive hidden-xs " style="text-align: center">
+                    <tr id="row1">
+                        <td>多选</td>
+                        <td>照片</td>
+                        <td>用户名</td>
+                        <td>姓名</td>
+                        <td>电话</td>
+                        <td>年龄</td>
+                        <td>性别</td>
+                        <td><select class="form-control" id="status">
+                            <option th:value="null">所有状态</option>
+                            <option th:value="1" id="normal">正常状态</option>
+                            <option th:value="999" id="locked">锁定状态</option>
+                            <option th:value="2" id="deleted">删除状态</option>
+                        </select></td>
+                        <td>注册日期</td>
+                        <td>操作</td>
+                    </tr>
+
+                    <tr >
+                        <td ><input type="checkbox" id="selectAll" class="form-control checkbox-inline"/><span></span>全选
+                        </td>
+                        <td >
+                            <button class="btn btn-xs btn-info" id="plAddRole" shiro:hasRole="roleAndAction">为用户重新分配角色</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-warning" id="plSuo">批量锁定</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success" id="plJie">批量解锁</button>
+                        </td>
+                        <td  >
+                            <button class="btn btn-xs btn-danger" id="plShan">批量删除</button>
+                        </td>
+                        <td  >
+                            <button class="btn btn-xs btn-success" id="plHui">批量恢复</button>
+                        </td>
+
+                    </tr>
+                </table>
+                <div class="visible-xs col-xs-10 col-xs-push-1" style="margin-bottom: 1rem">
+                    <select class="form-control" id="status">
+                        <option value="">所有状态</option>
+                        <option value="1">正常状态</option>
+                        <option value="999">锁定状态</option>
+                        <option value="2">删除状态</option>
+                    </select>
+                </div>
+                <div id="shouji">
+                </div>
+                <table
+                        class="table  table-hover table-responsive visible-xs">
+                    <tr>
+                        <td><input type="checkbox" id="selectAll" style="width: 30%" class="form-control"/><span></span>全选</td>
+                        <td style="vertical-align: middle">
+                            <button class="btn btn-xs btn-info" id="plAddRole">为用户重新分配角色</button>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <button class="btn btn-xs btn-warning" id="plSuo" style="margin: 1rem">批量锁定</button>
+                            <button class="btn btn-xs btn-success" id="plJie" style="margin: 1rem">批量解锁</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-danger" id="plShan" style="margin: 1rem">批量删除</button>
+                            <button class="btn btn-xs btn-success" id="plHui" style="margin: 1rem">批量恢复</button>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div th:replace="plugins/splitBar::splitBar">
+        </div>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:inline="javascript" th:src="@{/js/pages/back/member/member_list.js}"></script>
+</html>

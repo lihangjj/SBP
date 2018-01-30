@@ -4,7 +4,7 @@ $.extend($.validator.messages, {
     email: "请输入正确的EMAIL地址！",
     url: "请输入合法的网址！",
     date: "请输入合法的日期！",
-    dateISO: "请输入合法的日期（例如：yyyy-mm-dd或yyyy/mm/dd）！",
+    dateISO: "请输入合法的日期（例如：yyyy-mm-dd）！",
     number: "请输入合法的数字（整数或小数）！",
     digits: "请输入整型数据！",
     creditcard: "请输入合法的信用卡号！",

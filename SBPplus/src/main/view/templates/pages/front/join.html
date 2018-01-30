@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden;">
+<head th:replace="plugins/include_javascript::js">
+</head>
+<body style="overflow-x:hidden;visibility: hidden;" id="body">
+<link rel="stylesheet" type="text/css" th:href="@{/css/pages/front/front.css}"/>
+<div class="container-fluid" style="text-align: center;">
+    <!--导航条-->
+    <div th:replace="plugins/navbar::navbar"></div>
+    <!--千里码logo-->
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="logoDiv" class="col-xs-1 col-xs-push-1" style="z-index:1;position: absolute;">
+                <img th:src="@{/images/index/myLogodaizi.png}" id="logo"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-10 col-xs-push-1">
+            <div class="panel panel-success">
+                <div class="panel-heading"><h1>岗位需求</h1></div>
+                <div class="panel-body">
+                    <div th:replace="plugins/search::search"></div>
+                    <table class="table table-bordered table-hover" style="min-height: 50rem" >
+                        <tr id="row1">
+                            <td><label>现招岗位</label></td>
+                            <td ><label>岗位职责</label></td>
+                            <td style="width: 10%"><label>发布日期</label></td>
+                            <td><label>工作经验</label></td>
+                            <td><label>补充说明</label></td>
+                            <td><label>薪资范围</label></td>
+                            <td ><label>相关福利</label></td>
+                            <td><label>工作地点</label></td>
+                            <td><label>招聘人数</label></td>
+                            <td><label>学历要求</label></td>
+                            <td><label>其他要求</label></td>
+                            <td><label>联系电话</label></td>
+                        </tr>
+                    </table>
+                    <div th:replace="plugins/splitBar::splitBar"></div>
+
+                </div>
+                <div class="panel-footer">有意请投递简历至邮箱:237377116@qq.com</div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="plugins/footer::footer"></div>
+    <script type="text/javascript" th:src="@{/js/pages/front/join/post-list.js}"></script>
+</div>
+</body>
+</html>

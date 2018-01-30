@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SBPplus:war">
+    <output-path>$PROJECT_DIR$/SBPplus/target</output-path>
+    <root id="archive" name="lz.war">
+      <element id="artifact" artifact-name="SBPplus:war exploded" />
+    </root>
+  </artifact>
+</component>

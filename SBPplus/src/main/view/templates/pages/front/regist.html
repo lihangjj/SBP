@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden;">
+<head th:replace="plugins/include_javascript::js">
+</head>
+<body style="overflow-x:hidden;visibility: hidden;" id="body">
+<script type="text/javascript"  th:src="@{/js/pages/front/front.js}"></script>
+
+<div class="container-fluid" style="text-align: center;">
+    <!--导航条-->
+    <div th:replace="plugins/navbar::navbar"></div>
+    <!--千里码logo-->
+    <div class="row" >
+        <div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-3" style="position: absolute;top: 40%">
+            <div class="panel panel-danger" style="text-align: center">
+                <div class="panel-heading" >该功能即将开通!敬请关注！</div>
+                <div class="panel-body">
+                    <div style="text-align: center">
+                       抱歉，该功能暂未开通 ^_^
+                    </div>
+                </div>
+                <div class="panel-footer" ><a th:href="@{/}"><button class="btn btn-success" id="bt">返回首页</button></a></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div th:replace="plugins/footer::footer"></div>
+</body>
+
+</html>

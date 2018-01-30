@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<link type="text/css" rel="stylesheet" th:href="@{/bootstrap/colorPicker/bootstrap-colorpicker.min.css}"/>
+<script type="text/javascript" th:src="@{/bootstrap/colorPicker/bootstrap-colorpicker.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<style type="text/css">
+
+    #noCustomize img {
+        width: 30rem;
+        margin: 1rem;
+        height: 15rem;
+        border-radius: 5px;
+        transition: 0.5s;
+    }
+
+    #noCustomize img:hover {
+       /*transform: scale(1.05);*/
+        box-shadow: 0 0 10px red;
+
+    }
+
+    #customize select, #customize input {
+        background: rgba(0, 0, 0, 0);
+        border: none;
+    }
+
+    #noCustomize select {
+        width: auto;
+        background: rgba(0, 0, 0, 0);
+        border: none;
+        margin: 1rem 0 1rem 50%;
+        transform: translateX(-50%);
+        border-radius: 5px;
+    }
+
+
+</style>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">背景风格设置</div>
+        <form action="/pages/back/system/setStyle" method="post" enctype="multipart/form-data"
+              style="margin-bottom: 20rem;">
+            <div id="noCustomize">
+                <div class="row" style="text-align: center">
+                    <div class="col-xs-12 ">
+                        <img id="fImg" th:src="@{/images/pages/back/system/defaultStyle.jpg}"/>
+                        <input type="radio" class="form-control" name="style" value="default"
+                               th:checked="${#strings.arraySplit(session.styleValue,':')[0]=='default'?true:false}"/>系统默认
+                    </div>
+                    <div class="col-xs-12 ">
+                        <img th:src="@{/upload/system/hktk-bg.jpg}"/>
+                        <img th:src="@{/upload/system/hktk-bg1.jpg}"/>
+                        <img th:src="@{/upload/system/hktk-bg2.jpg}"/>
+
+                        <input type="radio" class="form-control" name="style" value="hktk"
+                               th:checked="${#strings.arraySplit(session.styleValue,':')[0]=='hktk'?true:false}"
+                        />
+                        <label>海阔天空</label>
+                        <select class="form-control" name="styleValue">
+                            <option value="hktk:/upload/system/hktk-bg.jpg"
+                                    th:selected="${session.styleValue=='hktk:/upload/system/hktk-bg.jpg'?true:false}">
+                                沐浴阳光
+                            </option>
+                            <option value="hktk:/upload/system/hktk-bg1.jpg"
+                                    th:selected="${session.styleValue=='hktk:/upload/system/hktk-bg1.jpg'?true:false}">
+                                黄沙海星
+                            </option>
+                            <option value="hktk:/upload/system/hktk-bg2.jpg"
+                                    th:selected="${session.styleValue=='hktk:/upload/system/hktk-bg2.jpg'?true:false}">
+                                蓝色深情
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+                <div class="row" style="text-align: center;margin-top: 3rem">
+                    <div class="col-xs-12 ">
+                        <img th:src="@{/upload/system/tdcq1.jpg}"/>
+                        <img th:src="@{/upload/system/tdcq2.jpg}"/>
+                        <img th:src="@{/upload/system/tdcq3.jpg}"/>
+
+                        <input type="radio" class="form-control" name="style" value="tdcq"
+                               th:checked="${#strings.arraySplit(session.styleValue,':')[0]=='tdcq'?true:false}"
+
+                        /><label>天道酬勤</label>
+                        <select class="form-control" name="styleValue">
+                            <option value="tdcq:/upload/system/tdcq1.jpg"
+                                    th:selected="${session.styleValue=='tdcq:/upload/system/tdcq1.jpg'?true:false}">就是酬勤
+                            </option>
+                            <option value="tdcq:/upload/system/tdcq2.jpg"
+                                    th:selected="${session.styleValue=='tdcq:/upload/system/tdcq2.jpg'?true:false}">水墨酬勤
+                            </option>
+                            <option value="tdcq:/upload/system/tdcq3.jpg"
+                                    th:selected="${session.styleValue=='tdcq:/upload/system/tdcq3.jpg'?true:false}">业精于勤
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 ">
+                        <img th:src="@{/upload/system/zqbx1.jpg}"/>
+                        <img th:src="@{/upload/system/zqbx2.jpg}"/>
+                        <img th:src="@{/upload/system/zqbx3.jpg}"/>
+                        <input type="radio" class="form-control" name="style" value="zqbx"
+                               th:checked="${#strings.arraySplit(session.styleValue,':')[0]=='zqbx'?true:false}"
+                        /><label>自强不息</label>
+
+                        <select class="form-control" name="styleValue">
+                            <option value="zqbx:/upload/system/zqbx1.jpg"
+                                    th:selected="${session.styleValue=='zqbx:/upload/system/zqbx1.jpg'?true:false}"
+                            >
+                                人中吕布
+                            </option>
+                            <option value="zqbx:/upload/system/zqbx2.jpg"
+                                    th:selected="${session.styleValue=='zqbx:/upload/system/zqbx2.jpg'?true:false}"
+
+                            >
+                                傲雪寒梅
+                            </option>
+                            <option value="zqbx:/upload/system/zqbx3.jpg"
+                                    th:selected="${session.styleValue=='zqbx:/upload/system/zqbx3.jpg'?true:false}"
+                            >
+                                登峰造极
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="text-align: center">
+                <div style="font-size: 4rem">自定义</div>
+                <input type="radio" class="form-control" name="style" value="zdy" id="customizeRadio"
+                       th:checked="${#strings.arraySplit(session.styleValue,':')[0]=='zdy'?true:false}"
+
+                />
+            </div>
+            <div class="row" style="text-align: center;" id="customize">
+
+                <div class="col-xs-12 col-md-6" style="margin-top:5rem;">
+                    <div class="form-inline">
+                        <label>①头部样式：</label>
+                        <select class="form-control" id="headBk">
+                            <option value="0"
+                                    th:selected="${#strings.arraySplit(session.hdColor,':')[0]}=='color'?true:false">
+                                背景颜色
+                            </option>
+                            <option value="1"
+                                    th:selected="${#strings.arraySplit(session.hdColor,':')[0]}=='img'?true:false">
+                                背景图片
+                            </option>
+                        </select>
+                        <label>颜色值：</label>
+                        <div id="hdColor" class="input-group colorpicker-component">
+                            <input type="text" class="form-control" placeholder="请选择颜色" name="hdColor"
+                                   th:disabled="${#strings.arraySplit(session.hdColor,':')[0]}=='color'?false:true"
+                                   th:value="${#strings.arraySplit(session.hdColor,':')[1].contains(')')?#strings.arraySplit(session.hdColor,':')[1]:'rgb(38, 50, 56)'}"
+                            />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                        <label>图片：</label>
+                        <input type="file" class="form-control" id="hdPic" name="hdpic"
+                               th:disabled="${#strings.arraySplit(session.hdColor,':')[0]}=='img'?false:true"
+                        />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6" style="margin-top: 5rem">
+                    <div class="form-inline">
+                        <label>②左侧菜单：</label>
+                        <select class="form-control" id="menuBk">
+                            <option value="0"
+                                    th:selected="${#strings.arraySplit(session.menuColor,':')[0]}=='color'?true:false">
+                                背景颜色
+                            </option>
+                            <option value="1"
+                                    th:selected="${#strings.arraySplit(session.menuColor,':')[0]}=='img'?true:false">
+                                背景图片
+                            </option>
+                        </select>
+                        <label>颜色值：</label>
+                        <div id="menuColor" class="input-group colorpicker-component">
+                            <input type="text" class="form-control" id="ctColor" placeholder="请选择颜色"
+                                   name="menuColor"
+                                   th:disabled="${#strings.arraySplit(session.menuColor,':')[0]}=='color'?false:true"
+                                   th:value="${#strings.arraySplit(session.menuColor,':')[1].contains(')')?#strings.arraySplit(session.menuColor,':')[1]:'rgb(38, 50, 56)'}"
+                            />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                        <label>图片：</label>
+                        <input type="file" class="form-control" id="menuPic" name="menupic"
+                               th:disabled="${#strings.arraySplit(session.menuColor,':')[0]}=='img'?false:true"/>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6" style="margin-top: 5rem">
+                    <div class="form-inline">
+                        <label>③内容背景：</label>
+                        <select class="form-control" id="contentBk">
+                            <option value="0"
+                                    th:selected="${#strings.arraySplit(session.contentColor,':')[0]}=='color'?true:false">
+                                背景颜色
+                            </option>
+                            <option value="1"
+                                    th:selected="${#strings.arraySplit(session.contentColor,':')[0]}=='img'?true:false">
+                                背景图片
+                            </option>
+                        </select>
+                        <label>颜色值：</label>
+                        <div id="contentColor" class="input-group colorpicker-component">
+                            <input type="text" class="form-control" placeholder="请选择颜色" name="contentColor"
+                                   th:disabled="${#strings.arraySplit(session.contentColor,':')[0]}=='color'?false:true"
+                                   th:value="${#strings.arraySplit(session.contentColor,':')[1].contains(')')?#strings.arraySplit(session.contentColor,':')[1]:'rgb(201, 225, 233)'}"
+                            />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                        <label>图片：</label>
+                        <input type="file" id="ctPic" class="form-control" name="ctpic"
+                               th:disabled="${#strings.arraySplit(session.contentColor,':')[0]}=='img'?false:true"/>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6" style="margin-top: 5rem">
+                    <div class="form-inline">
+                        <label>④整体背景：</label>
+                        <select class="form-control" id="allBk">
+                            <option value="0"
+                                    th:selected="${#strings.arraySplit(session.bodyColor,':')[0]}=='color'?true:false">
+                                背景颜色
+                            </option>
+                            <option value="1"
+                                    th:selected="${#strings.arraySplit(session.bodyColor,':')[0]}=='img'?true:false">
+                                背景图片
+                            </option>
+                        </select>
+                        <label>颜色值：</label>
+                        <div id="bodyColor" class="input-group colorpicker-component">
+                            <input type="text" class="form-control" placeholder="请选择颜色" name="bodyColor"
+                                   th:disabled="${#strings.arraySplit(session.bodyColor,':')[0]}=='color'?false:true"
+                                   th:value="${#strings.arraySplit(session.bodyColor,':')[1].contains(')')?#strings.arraySplit(session.bodyColor,':')[1]:'rgb(201, 225, 233)'}"
+                            />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                        <label>图片：</label>
+                        <input type="file" id="bodyPic" class="form-control" name="bodypic"
+                               th:disabled="${#strings.arraySplit(session.bodyColor,':')[0]}=='img'?false:true"/>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;padding: 5rem">
+                <button class="btn btn-success" style="margin: 1rem" type="submit">提交</button>
+                <a th:href="@{/pages/back/loginSuccess}">
+                    <button class="btn btn-danger" style="margin: 1rem" type="button">取消</button>
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(":radio").each(function () {
+            if (!this.checked) {
+                $(this).nextAll("select").attr({"disabled": true})
+            }
+        });
+        $(":radio").each(function () {
+            $(this).click(function () {
+                $("#noCustomize select").attr({"disabled": true});
+                $(this).nextAll("select").attr({"disabled": false})
+            })
+        });
+
+        $("#contentColor").colorpicker();
+        $("#menuColor").colorpicker();
+        $("#hdColor").colorpicker();
+        $("#bodyColor").colorpicker();
+        $("#customize select").each(function () {
+            $(this).change(function () {
+                var colorInput = $(this).parent().find("input:eq(0)");
+                var fileInput = $(this).parent().find("input:eq(1)");
+                if (this.value == 0) {//老是少写一个=
+                    colorInput.attr("disabled", false);
+                    fileInput.attr("name", "");
+                    fileInput.attr("disabled", true);
+                } else {
+                    colorInput.attr("disabled", true);
+                    colorInput.attr("name", "");
+                    fileInput.attr("disabled", false);
+                }
+            });
+
+        });
+
+        $("#customize").click(function (e) {
+            $("#customizeRadio").get(0).checked = true;
+            $("#noCustomize select").attr({"disabled": true});
+            if (e.target.name!='bodyColor'){
+                $("[name=bodyColor]").val(null)
+            }
+        });
+
+    })
+</script>
+</body>
+</html>

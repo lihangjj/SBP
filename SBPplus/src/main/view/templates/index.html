@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
 <head th:replace="plugins/include_javascript::js"></head>
-<body style="overflow-x:hidden" id="body">
+<link rel="stylesheet" type="text/css" th:href="@{/css/pages/front/front.css}"/>
+
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+
 <div class="container-fluid" style="text-align: center;">
     <!--导航条-->
     <div th:replace="plugins/navbar::navbar"></div>
@@ -9,7 +12,7 @@
     <div class="row">
         <div class="col-xs-12 ">
             <div id="logoDiv" class="col-xs-1 col-xs-push-1" style="z-index:1;position: absolute;">
-                <img th:src="@{/images/index/myLogo.png}" id="logo"/>
+                <img th:src="@{/images/index/myLogodaizi.png}"  id="logo"/>
             </div>
             <img id="backImage" class="img-responsive" th:src="@{/images/index/b1.jpg}"/>
             <div id="companyTitle"
@@ -32,12 +35,12 @@
                         </div>
                         <div class="col-xs-8 " style="text-align: left;" id="yusuanDiv">
                             <select class="form-control" id="budget" name="budget">
-                                <option>项目预算</option>
+                                <option value="不确定">项目预算</option>
                                 <option>1万~3万</option>
                                 <option>3万~10万</option>
                                 <option>10万~30万</option>
                                 <option>30万以上</option>
-                                <option>不确定</option>
+                                <option value="不确定">不确定</option>
 
                             </select>
                             <input class="form-control" type="text" id="phone" name="phone" placeholder="输入您的手机号"/>
@@ -89,7 +92,7 @@
         <div class="col-md-12 ">
             <div id="fengexian" style="height: 5px;background: #00a2e9;">
             </div>
-            <div   id="youshi" style="max-width: 100%;background: white;font-size:5rem">
+            <div id="youshi" style="max-width: 100%;background: white;font-size:5rem">
                 <div style="position: relative;margin: auto;top: 50%;transform: translateY(-50%)">行业领先优势</div>
             </div>
 
@@ -307,28 +310,14 @@
 </div>
 <div th:replace="plugins/footer::footer"></div>
 </body>
+<script type="text/javascript"  th:src="@{/js/pages/front/front.js}"></script>
 <script type="text/javascript" th:src="@{/js/index.js}"></script>
+
 <link rel="stylesheet" type="text/css" th:href="@{/css/index/index.css}"/>
 <link rel="stylesheet" type="text/css" th:href="@{/css/index/index_sm.css}"/>
 <link rel="stylesheet" type="text/css" th:href="@{/css/index/index_md.css}"/>
 <link rel="stylesheet" type="text/css" th:href="@{/css/index/index_lg.css}"/>
 <style type="text/css">
-    #logo {
-        animation: rotateY 5s infinite;
-        -webkit-animation: rotateY 5s infinite;
-    }
-
-    @keyframes rotateY {
-        100% {
-            transform: rotateY(360deg);
-        }
-    }
-
-    @-webkit-keyframes rotateY {
-        100% {
-            transform: rotateY(360deg);
-        }
-    }
 
     #buzhou img {
         transition: 1s;

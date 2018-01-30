@@ -1,15 +1,12 @@
-window.onresize = function () {
-    windowNW = window.innerWidth;
-    windowH = window.innerHeight;
+
+$(window).resize(function () {
     if (windowNW != windowOw) {//如果窗口宽度改变，才执行程序
         windowOw = windowNW;//以前的宽度就应该等于现在的
         shanchangMarginTop();
-        initPublic();//公共初始化
     }
-};
+});
 
 $(function () {
-    initPublic();//公共初始化
     shanchangMarginTop();
     var guihuaH = $("#gongneng").height();
     $("#gongneng").next().height(guihuaH);
@@ -40,7 +37,7 @@ function shanchangMarginTop() {
             {
                 top:windowH*0.7*0.5
             }
-        )
+        );
         $("#shanchang img").height(windowH * 0.2);
     }
 

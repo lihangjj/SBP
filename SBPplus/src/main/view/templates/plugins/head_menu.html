@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" style="overflow-x:hidden">
+<body style="overflow-x:hidden" id="body">
+<div th:fragment="back_index" class="container-fluid">
+    <div th:fragment="head_menu" >
+        <script type="text/javascript" th:inline="javascript">
+            /*<![CDATA[*/
+            contentDivColor = [[${session.contentColor}]];
+            hdColor = [[${session.hdColor}]];
+            menuColor = [[${session.menuColor}]];
+            styleValue = [[${session.styleValue}]];
+            bodyColor = [[${session.bodyColor}]];
+            sysColor = [[${session.sysColor}]];
+            sysFont = [[${session.sysFont}]];
+            menuSelectedColor = [[${session.menuSelectedColor}]];
+            menuFontColor = [[${session.menuFontColor}]];
+            memberid = [[${session.memberid}]];
+            sessionid = [[${session.sessionid}]];
+            /*]]>*/
+            $(function () {
+//                window.localStorage.setItem("test","哈哈哈");
+//                if(navigator.geolocation){
+//                    alert("呵呵，竟然支持");
+//                    navigator.geolocation.getCurrentPosition(function (p) {
+//                        var lo=p.coords.longitude;//经度
+//                        var la=p.coords.latitude;//维度
+//                        alert("经度："+lo+",纬度："+la);
+//                    },function (e) {//出现错误
+//                        alert(e.code+"错误，该设备没有GPS");
+//                    })
+//                }else {
+//                    alert("麻烦还浏览器")
+//                }
+                $("#logout").click(function () {
+                    areYouSure("注销将不再保存登陆密码，您确定注销吗?", function () {
+                        window.location = "/logout";
+                    });
+                });
+                if ($("#type div").length > 0) {//表示已经设置了type，才显示模态窗口
+                    $("#modalAlert").modal("show");
+                    setTimeout(function () {
+                        $("#modalAlert").modal("hide");
+                    }, 2000);
+                }
+
+            })
+        </script>
+        <div class="row">
+            <div id="validateDiv" >
+                <button class="glyphicon glyphicon-menu-left" id="zhedie" style="background: none"></button>
+                <img th:src="@{/images/index/myLogo.png}"/>
+                <div style="position: absolute;right: 5%;z-index: 9;top:2rem;" class="">
+                    <div class="" style="display: inline">
+                        <button class="btn btn-primary " id="msg"><span class="badge" style="color: red;">5</span>消息</button>
+                    </div>
+                    <div class="dropdown " style="display: inline;cursor: pointer">
+                        <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">更多<span
+                                class="caret"></span></button>
+                        <ul class="dropdown-menu" style="margin-top: 1rem;min-width: 100%;" id="more">
+                            <li th:href="@{/loginPage}">退出</li>
+
+                            <li th:href="@{/logout}">注销</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    $(function () {
+                        $("#more li").each(function () {
+                            $(this).hover(function () {
+                                this.style.background = "green";
+
+                            }, function () {
+                                this.style.background = ""
+                            });
+
+                            $(this).click(function (e) {
+                                var href = $(this).attr("href");
+                                if (href.indexOf("logout") != -1) {
+                                    areYouSure("注销后登录密码不再保存，您确定注销吗？", function () {
+                                        window.location = href;
+                                    })
+                                } else if (href.indexOf("loginPage") != -1) {
+                                        window.location = href;
+                                }
+                                e.preventDefault();
+
+                            })
+                        })
+                    })
+                </script>
+            </div>
+        </div>
+        <div class="row">
+
+            <div id="menuDiv">
+                <p th:text="${session.color}"></p>
+                <div style="text-align: center;margin-bottom: 2rem;border-top: none" id="memberInfo">
+                    <img th:src="@{${session.photo}}" th:name="@{${session.bigphoto}}"
+                         style="width: 7rem;height:7rem;border-radius: 5px;"/><br/>
+                    <a th:href="@{/pages/back/member/editPre}" class="myA"> 信息修改</a><br/>
+                    <span>欢迎：<span th:text="${session.name}"></span> 光临！</span><br/>
+                </div>
+
+                <div th:id="'role-'+${role.roleid}" th:each="role:${session.allRoles}">
+                    <div th:id="'title-'+${role.roleid}" th:text="${role.title}">
+                    </div>
+                    <span class="glyphicon glyphicon-chevron-down" style="position: absolute; right: 1%"></span>
+
+                    <div th:if="${action.sflag}==1" th:id="'action-'+${role.roleid}" th:name="${action.actionid}"
+                         th:href="${action.url}"
+                         th:each="action:${role.actions}">
+                        <nobr th:text="${action.title}" style="margin-left: 1.2rem;height: 10rem"></nobr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--来到页面时的模态窗-->
+        <div id="modalAlert" class="modal fade" aria-labelledby="title" aria-hidden="true" tabindex="-1">
+            <div class="modal-dialog" id="alert" style="text-align: center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <label>操作结果</label>
+                    </div>
+                    <div class="modal-body" id="type">
+                        <div th:if="${type==true}"><img th:src="@{/images/lz/dui.png}"/><span th:text="${msg}"
+                                                                                              style="color: green;"></span>
+                        </div>
+                        <div th:if="${type==false}"><img th:src="@{/images/lz/cuo.png}"/><span th:text="${msg}"
+                                                                                               style="color: #ff2c01"></span>
+                        </div>
+                        <div th:if="${type=='警告'}"><img th:src="@{/images/lz/warning.png}"/><span th:text="${msg}"
+                                                                                                  style="color: #ffa900"></span>
+                        </div>
+
+                        <div th:if="${type=='提醒'}"><img th:src="@{/images/lz/dui.png}"/><span th:text="${msg}"
+                                                                                              style="color: #d93fff"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--JS可以控制的模态窗-->
+        <div id="alertM" class="modal fade" aria-labelledby="title" aria-hidden="true" tabindex="-1">
+            <div class="modal-dialog" id="alertM-d" style="text-align: center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <label>操作结果</label>
+                    </div>
+                    <div class="modal-body" id="typeM">
+                        <div style="display: none"><img th:src="@{/images/lz/dui.png}"/><span
+                                style="color: green;" id="successMsg"></span>
+                        </div>
+                        <div style="display: none"><img th:src="@{/images/lz/cuo.png}"/><span
+                                style="color: #ff2c01" id="failureMsg"></span>
+                        </div>
+                        <div style="display: none"><img th:src="@{/images/lz/warning.png}"/><span
+                                style="color: #ffa900" id="warningMsg"></span>
+                        </div>
+
+                        <div style="display: none"><img th:src="@{/images/lz/dui.png}"/><span
+                                style="color: #d93fff" id="pointMsg"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--展示大图的模态窗-->
+        <div id="showBigImg" class="modal fade" aria-labelledby="title" aria-hidden="true" tabindex="-1">
+            <div class="modal-dialog" style="width:95%;text-align: center">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align: center">
+                        <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <label id="title">大图查看</label>
+                    </div>
+                    <div class="modal-body " style="text-align: center">
+                        <img id="bigImg" style="max-height: 70rem;max-width: 100%;border-radius: 5px"/><br/>
+                        <button id="rotate" class="glyphicon glyphicon-repeat btn btn-success"></button>
+                        <script type="text/javascript">
+                            rotateImg();
+                        </script>
+                    </div>
+                    <div class="modal-footer">
+                        <small style="text-align: center;font-size: 1rem;color: gray">Esc键、或单机灰色区域关闭窗口</small>
+                        <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loadingData"
+             style="position: absolute;display:none;top:0;width:100%;background:rgba(0,0,0,0.2);z-index: 10;text-align: center;">
+            <div style="position: absolute;width: 16rem;height: 8rem;background:white;left: 50%;top:50%;z-index: 11;transform: translate(-50%,-50%);border-radius: 5px;text-align: center;">
+                <img th:src="@{/images/loading/loading.gif}" style="margin-top: 1rem"/>
+                <div style="margin-top: 1rem;color: black">
+                    数据处理中...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

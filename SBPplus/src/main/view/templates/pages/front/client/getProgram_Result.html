@@ -2,7 +2,7 @@
 <head th:include="plugins/include_javascript::js">
 </head>
 
-<body style="background: rgba(0,0,0,0.3)">
+<body style="background: rgba(0,0,0,0.3);visibility: hidden">
 <div class="container-fluid">
 
     <div class="row" style="margin-top: 10%">
@@ -17,7 +17,7 @@
 
                         <div th:if="${result==true}">
                             <img id="successImg" th:src="@{/images/client/front/success.png}"/>
-                            <h3 class="h3" style="text-align: center;font-family: '黑体">
+                            <h3 class="h3" style="text-align: center;">
                                 恭喜您！方案发布成功，我们会尽快与您联系，请您保持电话畅通</h3>
                         </div>
                         <div th:if="${result==false}">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <small>千里码，全方位为您服务</small>
+                    <small>利作，全方位为您服务</small>
                     <button class="btn btn-danger" id="returnIndex">关闭并回到首页</button>
                 </div>
             </div>

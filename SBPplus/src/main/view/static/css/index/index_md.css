@@ -1,9 +1,7 @@
 
 @media (min-width: 992px) {
 
-    #logo {
-        width: 40px;
-    }
+
     #companyTitle div:nth-child(1) {
         font-size: 40px;
     }
@@ -33,7 +31,6 @@
     }
 
     #price p {
-        font-family: '等线';
         font-size: 14px;
         color: #646464;
     }
@@ -89,7 +86,6 @@
 
     [role=form] button {
         height: 40px;
-        font-family: 等线;
         border: none;
         color: black;
         background: #00a2e9;

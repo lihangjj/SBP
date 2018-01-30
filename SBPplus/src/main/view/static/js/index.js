@@ -1,38 +1,37 @@
 var backImgH;
-window.onresize = function () {
-    windowNW = window.innerWidth;
-    windowH = window.innerHeight;
-    initPublic();//公共初始化
+
+$(window).resize(function () {
     if (windowNW != windowOw) {//如果设备改变宽度
         windowOw = windowNW;//以前的宽度就应该等于现在的
+
         if (windowNW < 500) {//手机屏
             backImgH = windowH * 0.5;
 
-        } else if (windowNW < 768){
+        } else if (windowNW < 768) {
             backImgH = windowH;
 
-        }else if (windowNW < 992){
+        } else if (windowNW < 992) {
             backImgH = windowH;
 
-        }else {
+        } else {
             backImgH = windowH;
         }
         $("#backImage").height(backImgH);
         $("#youshi").height(backImgH * 0.2)
     }
-
-
-};
+});
 
 $(function () {
-
-    initPublic();//公共初始化
     if (windowNW < 500) {//手机屏幕
-        backImgH =windowH * 0.5;
+        backImgH = windowH * 0.5;
+
     } else {
         backImgH = windowH;
+
     }
-    bgScale();
+    if ($("body").css("display") == "block") {
+        bgScale();
+    }
     $("#backImage").height(backImgH);
     $("#youshi").height(backImgH * 0.2);
     $("#body").on("click", hiddenForm);
@@ -47,7 +46,6 @@ $(function () {
         })
     });
     $("#modelBt").on("click", useModel);
-
     $("#xiangmuyuyue").validate({
         debug: true, // 取消表单的提交操作
         submitHandler: function (form) {
@@ -209,13 +207,13 @@ function bgScale() {
     setInterval(setAndCancel, 12000);
     $("#backImage").css({//执行放大
         "transform": "scale(1.2)",
-        "transition": "all 12s"
+        "transition": "12s"
     });
     var b1 = true;//切换图片标记
     function reset() {//将放大后的图片还原
         $("#backImage").css({
             "transform": "scale(1)",
-            "transition": "all 0s"
+            "transition": "0s"
         });
     }
 

@@ -1,0 +1,78 @@
+
+#realm > div {
+    padding: 10px;
+    transition: 0.5s;
+    border-radius: 5px;
+    margin: 1px;
+}
+#xijie img{
+    height: 8rem;
+}
+#realm > div:hover {
+    box-shadow: 0 0 10px #969696;
+    transform: translateY(10px);
+}
+
+html * {
+
+}
+
+#sctitle {
+    color: red;
+    margin: 10px;
+    font-size: 3rem;
+}
+
+#xijie > div {
+    padding: 5px;
+    transition: 0.5s;
+}
+
+#xijie > div:hover {
+    box-shadow: 0 0 10px #ffa900;
+    transform: translateY(-10px);
+    background: #cbcbcb;
+    border-radius: 10px;
+}
+
+#xijie img + div {
+    color: #ffffff;
+    margin: 10px;
+    font-size: 3rem;
+}
+
+#scContent {
+    font-size: 2.5rem
+}
+
+#xijie img + div + div {
+    font-size: 2.2rem;
+}
+
+
+
+#service a:hover {
+    color: #F08519;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+#buzhou img {
+    transition: 1s;
+}
+
+#buzhou img:hover {
+    transform: rotate(360deg)
+
+}
+
+#ourService img {
+    transition: 1s;
+}
+
+#ourService img:hover {
+    transform: translateY(3rem);
+}

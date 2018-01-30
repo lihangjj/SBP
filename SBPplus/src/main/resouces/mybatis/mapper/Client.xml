@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="qlm.cm.dao.IClientDAO">
+<mapper namespace="lz.cm.dao.IClientDAO">
     <select id="findById" parameterType="Client" resultType="Client">
         select mid,password,name,sflag,regdate,locked from member where mid=#{mid}
     </select>
@@ -9,4 +9,12 @@
         INSERT into client(claim,phone,budget,name,address,company,note,pubdate)VALUES
         (#{claim},#{phone},#{budget},#{name},#{address},#{company},#{note},#{pubdate});
     </insert>
+    <update id="doUpdate" parameterType="Client">
+        UPDATE client SET claim=#{claim},phone=#{phone},budget=#{budget},name=#{name},address=#{address},company=#{company},note=#{note}
+        WHERE clientid=#{clientid}
+    </update>
+    <update id="plUpdateDealFlag" parameterType="Map">
+        UPDATE client SET dealFlag=#{dealFlag} WHERE clientid IN
+        <foreach collection="ids" open="(" close=")" separator="," item="items">#{items}</foreach>
+    </update>
 </mapper>

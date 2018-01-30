@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<body style="overflow-x:hidden;visibility: visible" id="body" >
+<div class="container-fluid" style="margin-top: 10%" >
+    <div class="row" >
+        <div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-3">
+            <div class="panel panel-danger" style="text-align: center">
+                <div class="panel-heading" >非法访问！我是有安全验证的!</div>
+                <div class="panel-body">
+                    <div style="text-align: center">
+                        <nobr >
+                            <p th:text="${exception}"></p>
+                        </nobr>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer" ><button class="btn btn-success" id="bt">重新登陆</button></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" >
+    $(function () {
+        $("#bt").click(function () {
+            window.location="/loginPage";
+        })
+    })
+
+</script>
+
+
+</html>

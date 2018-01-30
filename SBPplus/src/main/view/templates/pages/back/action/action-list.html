@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<style type="text/css">
+    #shouji tr td {
+        vertical-align: middle;
+    }
+
+</style>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <!--modal谁先弹出来，谁就在前面-->
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">权限列表</div>
+        <div th:replace="plugins/search::search"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <form id="formDiv">
+                    <table class="table  table-hover hidden-xs " style="text-align: center" id="actb">
+                        <tr id="row1">
+                            <td width="5%">全选<input type="checkbox" class="form-control" id="selectAll"/></td>
+                            <td width="5%">权限ID</td>
+                            <td width="10%">权限名称</td>
+                            <td width="20%">权限标记</td>
+                            <td>权限路径</td>
+                            <td width="5%">显示标记</td>
+                            <td>操作</td>
+                        </tr>
+                    </table>
+                    <div id="shouji">
+                    </div>
+                    <div class="visible-xs form-inline form-group">
+                            <span>全选</span>
+                            <input type="checkbox" class="form-control" id="selectAll" style="width: 20%"/>
+
+                    </div>
+                    <div class="dropdown" style="margin-bottom: 1rem">
+                        <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">将选中权限添加至某个角色
+                        </button>
+                        <ul class="dropdown-menu"  id="addActionsTo">
+                            <li th:each="role:${allRole}" th:id="${role.roleid}"  th:text="${role.title}"
+                                style="cursor: pointer;"  onmouseenter="this.style.background='green'"
+                                onmouseleave="this.style.background=''">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">
+                            将选中权限从某个角色移除
+                        </button>
+                        <ul class="dropdown-menu" id="removeActionsFrom">
+                            <li th:each="role:${allRole}" th:id="${role.roleid}" th:text="${role.title}"
+                                style="cursor: pointer;" onmouseenter="this.style.background='green'"
+                                onmouseleave="this.style.background=''">
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center" class="hidden-xs">
+                        <button class="btn btn-success" type="button" id="addAction">增加权限</button>
+                        <button class="btn btn-warning" type="submit" id="addSure" style="display: none;">确定增加</button>
+                        <button class="btn btn-danger" type="button" id="addCancel" style="display: none;">取消增加</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div th:replace="plugins/splitBar::splitBar">
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" th:inline="javascript" th:src="@{/js/pages/back/action/action-list.js}"></script>
+</html>

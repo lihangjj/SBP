@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lz.cm.dao.IActionDAO">
+
+    <insert id="doCreate">
+        INSERT INTO action(title,flag,url,sflag)VALUES
+        (#{title},#{flag},#{url},#{sflag});
+    </insert>
+    <update id="doUpdate">
+    UPDATE action set title=#{title},flag=#{flag},url=#{url},sflag=#{sflag} WHERE actionid=#{actionid}
+    </update>
+
+
+</mapper>

@@ -1,31 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="qlm.cm.dao.IMemberDAO">
+<mapper namespace="lz.cm.dao.IMemberDAO">
+
+    <!--根据id查找member-->
     <select id="findById" parameterType="Member" resultType="Member">
         select * from member where memberid=#{memberid};
     </select>
+    <!--得到指定用户的角色-->
     <select id="getAllMemberRoles" parameterType="String" resultType="Role">
         SELECT * from role where roleid in(
         SELECT roleid from member_role where memberid=#{memberid});
     </select>
+    <!--得到指定用户的权限-->
     <select id="getAllMemberActions" parameterType="String" resultType="Action">
         SELECT * from action where actionid in(
         SELECT actionid from role_action where roleid in(
         SELECT roleid from member_role where memberid=#{memberid}))
     </select>
+    <!--登陆操作-->
     <select id="login" parameterType="Member" resultType="Member">
         SELECT * from member where memberid=#{memberid} and password=#{password}
     </select>
+    <!--更新错误标记-->
     <update id="updateEflag" parameterType="Member">
         UPDATE member set eflag=#{eflag} where memberid=#{memberid}
     </update>
-
+    <!--通过角色ID得到全部权限-->
     <select id="getAllActionsByRoleId" parameterType="int" resultType="Action">
-        SELECT * FROM ACTION WHERE actionid in(
+        SELECT * FROM action WHERE actionid in(
         SELECT actionid from role_action where roleid=#{roleid}
         )
+    </select>
+    <!--修改用户信息-->
+    <update id="updateMember" parameterType="Member">
+        UPDATE member set name=#{name},photo=#{photo},bigphoto=#{bigphoto},password=#{password},age=#{age},sex=#{sex},phone=#{phone}
+        where memberid=#{memberid}
+    </update>
+    <!--增加用户-->
+    <insert id="doCreate" parameterType="Member">
+        INSERT into member(memberid,name,photo,bigphoto,password,sflag,age,sex,phone,regdate)values
+        (#{memberid},#{name},#{photo},#{bigphoto},
+        #{password},#{sflag},#{age},#{sex},#{phone},#{regdate})
+    </insert>
+    <!--用户分页列表-->
+    <select id="splitVoByFlag" resultType="Member" parameterType="Map">
+        SELECT memberid,name,photo,bigphoto,sflag,age,sex,phone,note,regdate FROM member
+        <where>
+            <if test="keyWord!=null">
+                ${column} LIKE #{keyWord}
+            </if>
+            <if test="parameterValue!=null">
+                <if test="keyWord!=null">
+                    AND
+                </if>
+                ${parameterName}=#{parameterValue}
+            </if>
+        </where>
+        limit #{start},#{lineSize};
+    </select>
+    <!--用户分页列表总数-->
+    <select id="splitVoByFlagCount" resultType="int" parameterType="Map">
+        SELECT count(*) FROM member
+        <where>
+            <if test="keyWord!=null">
+                ${column} LIKE #{keyWord}
+            </if>
+            <if test="parameterValue!=null">
+                <if test="keyWord!=null">
+                    AND
+                </if>
+                ${parameterName}=#{parameterValue}
+            </if>
+        </where>
 
     </select>
+    <!--修改用户的flag,删除，锁定等-->
+    <update id="doUpdateSflag" parameterType="Map">
+      update member set sflag=#{sflag} WHERE memberid=#{memberid}
+    </update>
 
+    <!--批量修改用户的flag,删除，锁定等-->
+    <update id="doUpdateSflagBatch" parameterType="Map">
+        update member set sflag=#{sflag} WHERE memberid in
+        <foreach collection="ids" open="(" close=")" separator="," item="item">#{item}</foreach>
+    </update>
+    <!--修改用户的系统风格-->
+    <update id="updateStyle" parameterType="Member">
+        UPDATE member SET contentColor=#{contentColor},hdColor=#{hdColor},menuColor=#{menuColor},styleValue=#{styleValue},bodyColor=#{bodyColor} WHERE memberid=#{memberid}
+    </update>
+    <!--批量修改用户的系统字体风格-->
+    <update id="updateSysFont" parameterType="Member">
+        UPDATE member SET sysFont=#{sysFont},sysColor=#{sysColor},menuColor=#{menuColor},menuFontColor=#{menuFontColor},menuSelectedColor=#{menuSelectedColor} WHERE memberid=#{memberid}
+    </update>
+    <!--根据用户id得到其对应的所有角色id-->
+    <select id="getAllRoleIdByMemberId" resultType="Integer">
+    SELECT roleid from member_role WHERE memberid=#{memberid}
+    </select>
+
+    <insert id="addRoleToMember">
+        INSERT INTO member_role(memberid,roleid)VALUES (#{memberid},#{roleid})
+    </insert>
+    <delete id="removeRoleFromMember">
+        DELETE FROM member_role WHERE memberid=#{memberid} AND roleid=#{roleid}
+    </delete>
 </mapper>

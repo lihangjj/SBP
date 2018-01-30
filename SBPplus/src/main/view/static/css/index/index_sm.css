@@ -1,11 +1,7 @@
 
-@media (min-width: 680px) {
-    #logo {
-        width: 30px;
-    }
-    #logoDiv{
-        margin-top: 20px;
-    }
+@media (min-width: 600px) {
+
+
     #companyTitle div:nth-child(1) {
         font-size: 30px;
     }

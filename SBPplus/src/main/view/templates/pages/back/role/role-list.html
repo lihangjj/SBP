@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<style type="text/css">
+    #dntb tr td ,#shouji tr td {
+        vertical-align: middle;
+
+    }
+</style>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <!--modal谁先弹出来，谁就在前面-->
+    <div id="hisActionWindow" class="modal fade" aria-labelledby="title" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog" style="min-width: 60%">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center">
+                    <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <label >此角色拥有的角色如下：</label>
+                </div>
+                <div class="modal-body">
+                    <table class="table  table-hover table-responsive" style="text-align: center" id="hisRoleTable">
+                        <tr id="hisAction-row">
+                            <td>权限ID</td>
+                            <td>权限名称</td>
+                            <td>角色标记</td>
+                            <td>角色路径</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <small style="text-align: center;font-size: 1rem;color: gray">Esc键、或单机灰色区域关闭窗口</small>
+                    <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="roleWindow" class="modal fade" aria-labelledby="title" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center">
+                    <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <label id="title">为用户增加或移除所选角色，请选择用户</label>
+                </div>
+                <div class="modal-body">
+                    <table class="table  table-hover table-responsive" id="dntb" style="text-align: center">
+                        <tr id="member-row">
+                            <td>多选 </td>
+                            <td>照片</td>
+                            <td>姓名</td>
+                            <td>用户名</td>
+                        </tr>
+                        <tr class="hidden-xs">
+                            <td>
+                                <input type="checkbox" id="selectAll"
+                                       class="form-control checkbox-inline"/><span></span>全选
+                            </td>
+                            <td>
+                                <button class="btn  btn-success " id="plRoleAddToMember">将角色增加至所选用户</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-warning " id="plRoleRemoveFromMember">将角色从所选用户移除</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-info " data-dismiss="modal">取消</button>
+                            </td>
+                        </tr>
+                        <tr class="visible-xs">
+                            <td colspan="4">
+                                <input type="checkbox" id="selectAll"
+                                       class="form-control checkbox-inline"/><span></span>全选
+                            </td>
+                        </tr>
+                        <tr class="visible-xs">
+                            <td colspan="4">
+                                <button class="btn  btn-success " id="plRoleAddToMember">将角色增加至所选用户</button>
+                            </td>
+                        </tr>
+                        <tr class="visible-xs">
+                            <td colspan="4">
+                                <button class="btn btn-warning " id="plRoleRemoveFromMember">将角色从所选用户移除</button>
+                            </td>
+                        </tr>
+                        <tr class="visible-xs">
+                            <td colspan="4">
+                                <button class="btn btn-info " data-dismiss="modal">取消</button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <small style="text-align: center;font-size: 1rem;color: gray">Esc键、或单机灰色区域关闭窗口</small>
+                    <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">角色列表</div>
+        <div th:replace="plugins/search::search"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <form id="formDiv">
+                    <table class="table  table-hover hidden-xs " style="text-align: center" id="roletb">
+                        <tr id="row1">
+                            <td>多选<input type="checkbox" class="form-control" id="selectAllRole"/></td>
+                            <td>角色ID</td>
+                            <td>角色名称</td>
+                            <td>角色标记</td>
+                            <td colspan="2">操作</td>
+                        </tr>
+                    </table>
+                    <div id="shouji">
+                    </div>
+                    <div class="visible-xs form-inline form-group">
+                        <span>全选</span>
+                        <input type="checkbox" class="form-control" id="selectAllRole" style="width: 20%"/>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-info" id="addOrRemoveRoles">为用户增加或移除选定角色</button>
+                    </div>
+
+                    <div style="text-align: center" class="hidden-xs">
+                        <button class="btn btn-success" type="button" id="addRole">增加角色</button>
+                        <button class="btn btn-warning" type="submit" id="addSure" style="display: none;">确定增加</button>
+                        <button class="btn btn-danger" type="button" id="addCancel" style="display: none;">取消增加</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div th:replace="plugins/splitBar::splitBar">
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" th:inline="javascript" th:src="@{/js/pages/back/role/role-list.js}"></script>
+</html>

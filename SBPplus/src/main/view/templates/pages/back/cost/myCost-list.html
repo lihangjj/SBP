@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.min.css}"/>
+
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.min.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.zh-CN.js}"></script>
+<style type="text/css">
+    #dntb tr td,#shouji tr td{
+        vertical-align: middle;
+    }
+
+</style>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <!--modal谁先弹出来，谁就在前面-->
+    <div id="editCostPre" class="modal fade" aria-labelledby="title" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center">
+                    <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <label id="title">成本记录修改</label>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-push-1 " style="border: solid #d3d3d3 1px;border-radius: 5px;">
+                            <form class="form" id="formDiv" enctype="multipart/form-data" method="post"
+                                  th:action="@{/pages/back/cost/edit}">
+                                <input type="hidden" id="costid" name="costid"/>
+                                <input type="hidden" id="photo" name="photo"/>
+                                <input type="hidden" id="bigphoto" name="bigphoto"/>
+                                <input type="hidden" id="bxflag" name="bxflag"/>
+                                <div class="form-inline form-group ">
+                                    <label>标题：</label>
+                                    <input class="form-control" type="text" placeholder="请输入标题（必填）" name="title"
+                                           th:id="title"/>
+                                    <span th:id="titleMsg" style="margin-left: 2rem"></span>
+                                </div>
+                                <div class="form-inline form-group ">
+                                    <label>数量：</label>
+                                    <input class="form-control" type="text" id="amount" name="amount"
+                                           placeholder="可以不填"/>
+                                    <span th:id="amountMsg" style="margin-left: 2rem"></span>
+                                </div>
+                                <div class="form-inline form-group ">
+                                    <label>凭证：</label>
+                                    <img id="preview" alt="请上传凭证"
+                                         style="height: 10rem;width: 10rem;border-radius: 5px;cursor: pointer"/><br/>
+                                    <span class="btn btn-xs btn-success" style="margin-top: 2rem"
+                                          id="reUpload">上传</span>
+                                    <span id="rotate" class="glyphicon glyphicon-repeat btn btn-primary btn-xs"
+                                          style="margin-top: 1.8rem"></span>
+                                    <span></span>
+                                    <script type="text/javascript">
+                                        rotateImg();
+                                    </script>
+
+                                    <input type="file" style="display: none" name="pic" id="pic"/>
+                                </div>
+                                <div class="form-inline form-group ">
+                                    <label>金额：</label>
+                                    <input class="form-control" type="text" id="cost" name="cost"
+                                           placeholder="请输入金额（必填）"/><label>元</label>
+                                    <span th:id="costMsg" style="margin-left: 2rem"></span>
+                                </div>
+                                <div class="form-inline form-group ">
+                                    <label>说明：</label>
+                                    <textarea class="form-control" style="resize: none;" placeholder="是否有说明？"
+                                              id="note"
+                                              name="note"></textarea>
+                                </div>
+                                <div class="form-inline form-group ">
+                                    <label>时间：</label>
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input type='text' class="form-control" id="time" name="time"/>
+                                        <span class="input-group-addon">
+                             <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-inline form-group ">
+                                    <button type="submit" class="btn btn-success">修改成本</button>
+                                    <button class="btn btn-danger" data-dismiss="modal" type="button">取消修改</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <small style="text-align: center;font-size: 1rem;color: gray">Esc键、或单机灰色区域关闭窗口</small>
+                    <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">费用列表</div>
+        <div th:replace="plugins/search::search"></div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <table id="dntb" class="table  table-hover table-responsive hidden-xs " style="text-align: center">
+                    <tr id="row1">
+                        <td>多选</td>
+                        <td>标题</td>
+                        <td>属于</td>
+                        <td>数量</td>
+                        <td>金额</td>
+                        <td>凭证</td>
+                        <td>说明</td>
+                        <td>时间</td>
+                        <td><select class="form-control" id="status">
+                            <option th:value="null">所有状态</option>
+                            <option th:value="0" id="normal">已经记录</option>
+                            <option th:value="1" id="deleted">已经删除</option>
+                        </select></td>
+                        <td>报销与否</td>
+                        <td>操作</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="selectAll" class="form-control"/>
+                            <span></span>
+                            全选
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success" id="plBx">批量报销</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-danger" id="plBB">批量不报</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-danger" id="plShan">批量删除</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-success" id="plHui">批量恢复</button>
+                        </td>
+
+                    </tr>
+                </table>
+                <div class="visible-xs col-xs-10 col-xs-push-1" style="margin-bottom: 1rem">
+                    <select class="form-control" id="status">
+                        <option value="">所有状态</option>
+                        <option value="0">已经记录</option>
+                        <option value="1">已经删除</option>
+                    </select>
+                </div>
+                <div id="shouji">
+                </div>
+                <table
+                        class="table table-striped table-hover table-responsive visible-xs">
+                    <tr>
+                        <td><input type="checkbox" id="selectAll"/><span></span>全选</td>
+                        <td>
+                            <button class="btn btn-xs btn-success" id="plBx" style="margin: 1rem">批量报销</button>
+                            <button class="btn btn-xs btn-danger" id="plBB" style="margin: 1rem">批量不报</button>
+                            <button class="btn btn-xs btn-danger" id="plShan" style="margin: 1rem">批量删除</button>
+                            <button class="btn btn-xs btn-success" id="plHui" style="margin: 1rem">批量恢复</button>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <span style="font-size: 2.5rem" >当前查询费用合计：<span style="color: red" id="currentAllCost">0</span>元</span><br/>
+            <span style="font-size: 2.5rem">我的费用合计：<span style="color: red" th:text="${allCost}"></span>元</span>
+        </div>
+        <div th:replace="plugins/splitBar::splitBar">
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script type="text/javascript ">
+
+    $(function () {
+
+        initSimpleDate();
+        $("#reUpload").click(function () {
+            $("[type=file]").click();
+        });
+        $("[type=file]").change(
+            function () {
+                $("#reUpload").next().next().empty();
+                $("#reUpload").next().next().append(this.value);
+                imgPreview(this);
+            }
+        );
+        $("#formDiv").validate({
+            debug: true, // 取消表单的提交操作
+            submitHandler: function (form) {
+                form.submit(); // 提交表单
+            },
+            errorPlacement: function (error, element) {
+                $("#" + $(element).attr("id") + "Msg").append(error);
+            },
+            highlight: function (element, errorClass) {
+                $(element).fadeOut(1, function () {
+                    $(element).fadeIn(1, function () {
+                        $(element).css({
+                            "box-shadow": "0 0 10px rgba(255,0,0,1)"
+                        })
+                    });
+
+                })
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).fadeOut(1, function () {
+                    $(element).fadeIn(1, function () {
+                        $(element).css({
+                            "box-shadow": "0 0 10px rgba(0,255,0,1)"
+                        });
+                    });
+                })
+            },
+            errorClass: "text-danger",
+            messages: {
+                title: "请输入标题"
+
+            },
+            rules: {
+                title: {
+                    required: true
+
+                },
+                amount: {
+                    digits: true
+                },
+                cost: {
+                    required: true,
+                    number: true
+                }, time: {
+                    required: true,
+                    dateISO: true
+                }
+            }
+        });
+
+    })
+
+
+</script>
+<script type="text/javascript" th:inline="javascript" th:src="@{/js/pages/back/cost/myCost-list.js}"></script>
+</html>

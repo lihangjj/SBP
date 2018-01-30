@@ -1,47 +1,155 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <!--导航条-->
-    <div th:fragment="navbar" class="row" style="text-align: center;" id="nav">
-        <div class="visible-xs col-xs-1 col-xs-push-10 dropdown" style="position: fixed;top: 20px;z-index: 2;">
-            <img th:src="@{/images/index/liebiao.png}" class="dropdown-toggle" data-toggle="dropdown"
-                 style="width: 25px;" id="liebiao"/>
-            <ul class="dropdown-menu" style="background: black;">
-                <li>
-                    <nobr><a th:href="@{/}">首页</a></nobr>
-                </li>
-                <li>
-                    <nobr><a th:href="@{/service}">服务</a></nobr>
-                </li>
-                <li>
-                    <nobr><a>关于</a></nobr>
-                </li>
-                <li>
-                    <nobr><a th:href="@{/loginPage}">登陆</a></nobr>
-                </li>
-                <li>
-                    <nobr><a>注册</a></nobr>
-                </li>
-            </ul>
-        </div>
-        <!--导航条-->
+<!--导航条-->
+<div th:fragment="navbar" class="row" style="text-align: center; font-family: '等线'" id="nav">
+    <div class="visible-xs col-xs-1 col-xs-push-10 dropdown" style="position: fixed;top: 20px;z-index: 2;">
+        <img th:src="@{/images/index/liebiao.png}" class="dropdown-toggle" data-toggle="dropdown"
+             style="width: 25px;" id="liebiao"/>
+        <ul class="dropdown-menu" style="background: rgba(0,0,0,0.2);">
+            <li>
+                <nobr><a th:href="@{/}">首页</a></nobr>
+            </li>
+            <li>
+                <nobr><a th:href="@{/service}">服务</a></nobr>
+            </li>
+            <li>
+                <nobr><a th:href="@{/about}">关于</a></nobr>
+            </li>
+            <li>
+                <nobr><a th:href="@{/loginPage}">登陆</a></nobr>
+            </li>
+            <li>
+                <nobr><a th:href="@{/regist}">注册</a></nobr>
+            </li>
+        </ul>
 
-        <div th:fragment="" class="col-xs-3 col-xs-push-9 hidden-xs " style="position: fixed;top: 20px;z-index: 2;">
-            <div class="col-xs-12">
-                <div class="col-xs-2">
-                    <nobr><a th:href="@{/}">首页</a></nobr>
-                </div>
-                <div class="col-xs-2">
-                    <nobr><a th:href="@{/service}">服务</a></nobr>
-                </div>
-                <div class="col-xs-2">
-                    <nobr><a>关于</a></nobr>
-                </div>
-                <div class="col-xs-2">
-                    <nobr><a th:href="@{/loginPage}">登陆</a></nobr>
-                </div>
-                <div class="col-xs-2">
-                    <nobr><a>注册</a></nobr>
-                </div>
+    </div>
+    <div class="col-sm-1 col-sm-push-11 " style="position: fixed;right: 0;top: 70%;z-index: 3;">
+        <div>
+            <a id="QQ" class="hidden-xs">
+                <img style="width: 6rem;" th:src="@{/images/index/qq.png}"/>
+            </a>
+        </div>
+        <div>
+            <a href="sms:18223170162" class="visible-xs">
+                <img  style="width: 6rem;" th:src="@{/images/index/message.png}"/>
+            </a>
+        </div>
+        <div>
+            <a>
+                <img id="lxPhone" style="width: 6rem;" th:src="@{/images/index/syPhone.png}"/>
+                <span></span>
+            </a>
+
+        </div>
+
+
+
+    </div>
+
+    <!--导航条-->
+
+    <div class="col-xs-3 col-xs-push-9 hidden-xs " style="position: fixed;top: 20px;z-index: 2;">
+        <div class="col-xs-12">
+            <div class="col-xs-2">
+                <nobr><a th:href="@{/}">首页</a></nobr>
+            </div>
+            <div class="col-xs-2">
+                <nobr><a th:href="@{/service}">服务</a></nobr>
+            </div>
+            <div class="col-xs-2">
+                <nobr><a th:href="@{/about}">关于</a></nobr>
+            </div>
+            <div class="col-xs-2">
+                <nobr><a th:href="@{/loginPage}">登陆</a></nobr>
+            </div>
+            <div class="col-xs-2">
+                <nobr><a th:href="@{/regist}">注册</a></nobr>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" th:inline="javascript">
+
+
+        /*<![CDATA[*/
+        function popOverPhone() {
+            var color = "#405966";
+            $("#lxPhone").next().popover({
+                title: "<div style='color:" + color + ";text-align: center' id='lxdh'>" + "联系电话 " + "</div>",
+                content: "<div style='color:green;font-weight: 900;text-align: center' id='lxdh'>" + "黄先生：17708323117 " + "</div>" +
+                "<div style='color:green;font-weight: 900;text-align: center' id='lxdh'>" + "黎先生：17783370717 " + "</div>"
+                ,
+                placement: "auto",
+                html: true
+            });
+        }
+        $(function () {
+
+            var color = "#405966";
+            var url = windowNW < 992 ? "http://wpa.qq.com/msgrd?v=3&uin=237377116&site=qq&menu=yes"
+                : "tencent://message/?uin=237377116&amp;Site=有事Q我&amp;Menu=yes";
+            $("[id=QQ]").attr("href", url);
+            windowNW < 768 ? $("#lxPhone").parent().get(0).href = "tel:18223170162" : popOverPhone();
+            $("#lxPhone").click(function () {
+                if (windowNW > 768) {
+                    $(this).next().popover("show")
+                }
+            });
+
+            $("#lxdh").next().popover({
+                title: "<div style='color:" + color + ";text-align: center' id='lxdh'>" + "联系电话 " + "</div>",
+                content: "<div style='color:green;font-weight: 900;text-align: center' id='lxdh'>" + "黄先生：17708323117 " + "</div>" +
+                "<div style='color:green;font-weight: 900;text-align: center' id='lxdh'>" + "黎先生：17783370717 " + "</div>"
+                ,
+                placement: "auto",
+                html: true
+            });
+            $("#gsgw").next().popover({
+                title: "<div style='color:" + color + ";text-align: center' id='gsgw'>" + "公司官网 " + "</div>",
+                content: "<div style='color:green;font-weight: 900;text-align: center' id='gsgw'>" + "cqliz.cn " + "</div>",
+                placement: "auto",
+                html: true
+            });
+            $("#gsdz").next().popover({
+                title: "<div style='color:" + color + ";text-align: center' id='gsdz'>" + "公司地址 " + "</div>",
+                content: "<div style='color:green;font-weight: 900;text-align: center' id='gsdz'>" + "重庆市渝北区佳园路66号 " + "</div>",
+                placement: "auto",
+                html: true
+            });
+
+
+            $("#lxdh").click(function () {
+                $(this).next().popover("show");
+            });
+            $("#gsgw").click(function () {
+                $(this).next().popover("show");
+            });
+            $("#gsdz").click(function () {
+                $(this).next().popover("show");
+            });
+
+            $("body").click(function (e) {
+
+                var targetId = $(e.target).attr("id");
+
+                if (targetId != "lxdh") {
+                    $("#lxdh").next().popover("hide");
+                }
+                if (targetId != "gsgw") {
+                    $("#gsgw").next().popover("hide");
+                }
+                if (targetId != "gsdz") {
+                    $("#gsdz").next().popover("hide");
+                }
+                if (targetId != "lxPhone") {
+                    $("#lxPhone").next().popover("hide");
+                }
+
+            })
+
+        })
+
+        /*]]>*/
+    </script>
+</div>
 </html>

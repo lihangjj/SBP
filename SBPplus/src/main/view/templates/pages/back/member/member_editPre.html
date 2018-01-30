@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<script type="text/javascript ">
+    $(function () {
+        //前端密码加密
+        $("#reUpload").click(function () {
+            $("[type=file]").click();
+        });
+        $("[type=file]").change(
+            function () {
+                $("#reUpload").next().empty();
+                $("#reUpload").next().append(this.value);
+                imgPreview(this);
+
+            }
+        );
+        $("#formDiv").validate({
+            debug: true, // 取消表单的提交操作
+            submitHandler: function (form) {
+                form.submit(); // 提交表单
+                showLoadingData();
+            },
+            errorPlacement: function (error, element) {
+                $("#" + $(element).attr("id") + "Msg").append(error);
+            },
+            highlight: function (element, errorClass) {
+                $(element).fadeOut(1, function () {
+                    $(element).fadeIn(1, function () {
+                        $(element).css({
+                            "box-shadow": "0 0 10px rgba(255,0,0,1)"
+                        })
+                    });
+
+                })
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).fadeOut(1, function () {
+                    $(element).fadeIn(1, function () {
+                        $(element).css({
+                            "box-shadow": "0 0 10px rgba(0,255,0,1)"
+                        });
+                    });
+                })
+            },
+            errorClass: "text-danger",
+            messages: {
+                name: "请输入用户名",
+                phone: "请输入正确的手机号",
+                age: "18到155岁之间"
+
+            },
+            rules: {
+                name: {
+                    required: true
+                },
+                age: {
+                    required:true,
+                    digits: true,
+                    range: [18, 155]
+                },
+                password:{
+                    equalTo:$("#password2")
+                },
+                password2:{
+                    equalTo:$("#password")
+                }
+                ,
+                phone: {
+                    required: true,
+                    digits: true,
+                    rangelength: [11, 11],
+                    remote: {
+                        url: "/checkCellPhoneNumber", // 后台处理程序
+                        type: "post", // 数据发送方式
+                        dataType: "json", // 接受数据格式
+                        data: { // 要传递的数据
+                            phone: function () {//必须用过这样的方式取得表单数据
+                                return $("#phone").val();
+                            }
+                        },
+                        dataFilter: function (data) {
+                            return data;
+                        }
+                    }
+
+                }
+            }
+        });
+        //为图片添加展示大图事件
+    })
+
+
+</script>
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">个人信息修改</div>
+        <div class="row">
+            <div class="col-xs-10 col-xs-push-1 " style="border: solid #d3d3d3 1px;border-radius: 5px;">
+                <form class="form" id="formDiv" enctype="multipart/form-data" method="post"
+                      th:action="@{/pages/back/member/edit}">
+                    <div class="form-inline form-group ">
+                        <label>账户名：</label>
+                        <input class="form-control" th:value="${member.memberid}" disabled="true"/>
+                        <input type="hidden" name="memberid" th:value="${member.memberid}"/>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>姓&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+                        <input class="form-control" type="text" id="name" name="name" placeholder="请输入姓名"
+                               th:value="${member.name}"/><span th:id="nameMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>照&nbsp;&nbsp;&nbsp;&nbsp;片：</label>
+
+                        <img  th:src="@{${member.photo}}" id="preview" th:name="${member.bigphoto}"
+                             style="height: 10rem;width: 10rem;border-radius: 5px;cursor: pointer"/><br/>
+                        <span class="btn btn-xs btn-success" style="margin-top: 2rem" id="reUpload">重新上传</span>
+                        <span></span>
+                        <input type="file" style="display: none" name="pic" id="pic"/>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>新密码：</label>
+                        <input class="form-control" type="password" id="password"  name="password"
+                               placeholder="不填写则不修改密码"/>
+                        <label>确认新密码：</label>
+                        <input class="form-control" type="password" id="password2" name="password2"
+                               placeholder="不填写则不修改密码"/><span th:id="passwordMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>年&nbsp;&nbsp;&nbsp;&nbsp;龄：</label>
+                        <input class="form-control" placeholder="请输入年龄" id="age" name="age" th:value="${member.age}"/>
+                        <span th:id="ageMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+                        <input class="form-control"  type="radio"  name="sex" th:value="男"  th:checked="${member.sex=='男'?true:false}"/><label>男&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <input class="form-control"  type="radio"  name="sex" th:value="女" th:checked="${member.sex=='女'?true:false}"/><label>女</label>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>电&nbsp;&nbsp;&nbsp;&nbsp;话：</label>
+                        <input class="form-control" placeholder="请输入电话" id="phone" name="phone"
+                               th:value="${member.phone}"/>
+                        <span th:id="phoneMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <button type="submit" class="btn btn-success">确认修改</button>
+                        <a href="javascript:history.go(-1);"><button class="btn btn-danger" type="button">放弃修改</button></a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

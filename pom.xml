@@ -28,7 +28,7 @@
         </dependencies>
     </dependencyManagement>
     <build>
-        <finalName>qlm</finalName>
+        <finalName>lz</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -61,17 +61,24 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.9</source>
+                    <target>1.9</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <plugin>    <!-- 该插件的主要功能是进行项目的打包发布处理 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <!-- 该插件的主要功能是进行项目的打包发布处理 -->
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>    <!-- 设置程序执行的主类 -->
-                    <mainClass>qlm.SpringBootStartMain</mainClass>
+                    <mainClass>lz.SpringBootStartMain</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -81,6 +88,8 @@
                     </execution>
                 </executions>
             </plugin>
+
+
         </plugins>
     </build>
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv" ><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">客户需求列表</div>
+        <div th:replace="plugins/search::search"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table  table-hover  hidden-xs " style="text-align: center">
+                    <tr id="row1">
+                        <td>需求</td>
+                        <td>姓名</td>
+                        <td>电话</td>
+                        <td>预算</td>
+                        <td>发布日期</td>
+                        <td>备注</td>
+                        <td>地址</td>
+                        <td>单位</td>
+                        <td><select class="form-control" id="status">
+                            <option th:value="null">所有状态</option>
+                            <option th:value="0" id="locked" style="color:red;">未处理</option>
+                            <option th:value="1" id="normal" style="color:green;">已处理</option>
+                        </select></td>
+                        <td>操作</td>
+                    </tr>
+
+                </table>
+                <div class="visible-xs col-xs-10 col-xs-push-1" style="margin-bottom: 1rem">
+                    <select class="form-control" id="status">
+                        <option value="">所有状态</option>
+                        <option th:value="0" id="locked">未处理</option>
+                        <option th:value="1" id="normal">已处理</option>
+                    </select>
+                </div>
+                <div id="shouji">
+                </div>
+
+            </div>
+        </div>
+        <div th:replace="plugins/splitBar::splitBar">
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:inline="javascript" th:src="@{/js/pages/back/client/client-list.js}"></script>
+
+</html>

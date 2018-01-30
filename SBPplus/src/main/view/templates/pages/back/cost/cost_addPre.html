@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow-x:hidden">
+<head th:include="plugins/include_javascript::js"></head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/pages/back/menu.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.min.css}"/>
+<script type="text/javascript" th:src="@{/js/pages/back/index.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.min.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/dateTimePicker/bootstrap-datetimepicker.zh-CN.js}"></script>
+
+<script type="text/javascript ">
+
+
+    $(function () {
+        addValidateDateTime();
+        initDetailDate();
+        $("#reUpload").click(function () {
+            $("[type=file]").click();
+        });
+        $("[type=file]").change(
+            function () {
+                $("#reUpload").next().empty();
+                $("#reUpload").next().append(this.value);
+                imgPreview(this);
+            }
+        );
+
+
+        $("#formDiv").validate({
+            debug: true, // 取消表单的提交操作
+            submitHandler: function (form) {
+                form.submit(); // 提交表单
+                showLoadingData();
+            },
+            errorPlacement: function (error, element) {
+                $("#" + $(element).attr("id") + "Msg").append(error);
+            },
+            highlight: function (element, errorClass) {
+                $(element).fadeOut(1, function () {
+                    $(element).fadeIn(1, function () {
+                        $(element).css({
+                            "box-shadow": "0 0 10px rgba(255,0,0,1)"
+                        })
+                    });
+
+                })
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).fadeOut(1, function () {
+                    $(element).fadeIn(1, function () {
+                        $(element).css({
+                            "box-shadow": "0 0 10px rgba(0,255,0,1)"
+                        });
+                    });
+                })
+            },
+            errorClass: "text-danger",
+            messages: {
+                title: "请输入标题"
+
+            },
+            rules: {
+                title: {
+                    required: true
+                },
+                amount: {
+                    digits: true
+                },
+                cost: {
+                    required: true,
+                    number: true
+                }, time: {
+                    datetime: true
+                }
+            }
+        });
+
+    })
+
+
+</script>
+
+<body style="overflow-x:hidden;visibility: hidden" id="body">
+<div class="container-fluid">
+    <div th:replace="plugins/head_menu::head_menu"></div><!--引入写好的头部和左侧信息-->
+    <div id="contentDiv"><!--这里是主体-->
+        <div style="text-align: center;font-size: 5rem">成本记录</div>
+        <div class="row">
+            <div class="col-xs-10 col-xs-push-1 " style="border: solid #d3d3d3 1px;border-radius: 5px;">
+                <form class="form" id="formDiv" enctype="multipart/form-data" method="post"
+                      th:action="@{/pages/back/cost/add}">
+                    <div class="form-inline form-group ">
+                        <label>标题：</label>
+                        <input class="form-control" type="text" placeholder="请输入标题（必填）" name="title" th:id="title"/>
+                        <span th:id="titleMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>数量：</label>
+                        <input class="form-control" type="text" id="amount" name="amount" placeholder="可以不填"/>
+                        <span th:id="amountMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>凭证：</label>
+                        <img id="preview" alt="请上传凭证" src="/upload/cost/nophoto.png"
+                             style="height: 10rem;width: 10rem;border-radius: 5px;cursor: pointer"/><br/>
+                        <span class="btn btn-xs btn-success" style="margin-top: 2rem" id="reUpload">上传</span>
+                        <span></span>
+                        <input type="file" style="display: none" name="pic" id="pic"/>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>金额：</label>
+                        <input class="form-control" type="text" id="cost" name="cost"
+                               placeholder="请输入金额（必填）"/><label>元</label>
+                        <span th:id="costMsg" style="margin-left: 2rem"></span>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>说明：</label>
+                        <textarea class="form-control" style="resize: none;" placeholder="是否有说明？" id="note"
+                                  name="note"></textarea>
+                    </div>
+                    <div class="form-inline form-group ">
+                        <label>时间：</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control  " id="time" name="time" placeholder="默认今天"/>
+                            <span class="input-group-addon">
+                             <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <span id="timeMsg"></span>
+                    </div>
+
+                    <div class="form-inline form-group ">
+                        <button type="submit" class="btn btn-success">记录成本</button>
+                        <a th:href="@{/pages/back/loginSuccess}">
+                            <button class="btn btn-danger" type="button">取消记录</button>
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>
